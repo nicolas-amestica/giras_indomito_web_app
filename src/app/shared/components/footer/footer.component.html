@@ -1,0 +1,90 @@
+<footer class="bg-gray-900 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Logo y Descripción -->
+      <div class="space-y-4">
+        <img
+          src="/assets/images/logo/logo-web.png"
+          alt="Giras Indómito"
+          class="h-12 w-auto brightness-0 invert"
+        />
+        <p class="text-gray-400 text-sm">
+          Especialistas en giras de estudio para instituciones educativas.
+          Experiencias inolvidables con seguridad y calidad garantizada.
+        </p>
+      </div>
+
+      <!-- Navegación Rápida -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">Navegación</h3>
+        <ul class="space-y-2">
+          <li>
+            <a routerLink="/" class="text-gray-400 hover:text-white transition-colors">
+              <i class="pi pi-home mr-2"></i>Inicio
+            </a>
+          </li>
+          <li>
+            <a routerLink="/services" class="text-gray-400 hover:text-white transition-colors">
+              <i class="pi pi-briefcase mr-2"></i>Servicios
+            </a>
+          </li>
+          <li>
+            <a routerLink="/programs" class="text-gray-400 hover:text-white transition-colors">
+              <i class="pi pi-file-pdf mr-2"></i>Programas
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about" class="text-gray-400 hover:text-white transition-colors">
+              <i class="pi pi-users mr-2"></i>Nosotros
+            </a>
+          </li>
+          <li>
+            <a routerLink="/contact" class="text-gray-400 hover:text-white transition-colors">
+              <i class="pi pi-envelope mr-2"></i>Contacto
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contacto y Redes Sociales -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">Contacto</h3>
+        <div class="space-y-3 text-gray-400 text-sm">
+          <div class="flex items-start space-x-2">
+            <i class="pi pi-envelope mt-1"></i>
+            <a href="mailto:info@girasindomito.cl" class="hover:text-white transition-colors">
+              info&#64;girasindomito.cl
+            </a>
+          </div>
+          <div class="flex items-start space-x-2">
+            <i class="pi pi-phone mt-1"></i>
+            <a href="tel:+56963552893" class="hover:text-white transition-colors">
+              +56 9 6355 2893
+            </a>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="flex space-x-4 mt-6">
+          @for (social of socialLinks; track social.name) {
+            <a
+              [href]="social.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="social.name"
+              class="text-2xl text-gray-400 transition-colors"
+              [ngClass]="social.color"
+            >
+              <i [class]="social.icon"></i>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+      <p>&copy; {{ currentYear }} Giras Indómito. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

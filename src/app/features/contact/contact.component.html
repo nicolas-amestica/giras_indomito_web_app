@@ -1,0 +1,99 @@
+<!-- Hero Section -->
+<section class="relative h-96 flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="/assets/images/backgrounds/contact-hero.jpg"
+      alt="Contacto"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+  <div class="relative z-10 text-center text-white px-4" data-aos="fade-up">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Contáctanos</h1>
+    <p class="text-xl sm:text-2xl text-gray-200">Estamos aquí para ayudarte</p>
+  </div>
+</section>
+
+<!-- Información de Contacto -->
+<section class="py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="¿Cómo podemos ayudarte?"
+      subtitle="Elige tu medio de contacto preferido"
+    ></app-section-title>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      @for (info of contactInfo; track info.title; let i = $index) {
+        <div
+          class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow p-8 text-center"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100"
+        >
+          <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i [class]="info.icon + ' text-4xl text-primary-600'"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ info.title }}</h3>
+          <p class="text-gray-600 mb-6">{{ info.value }}</p>
+          <a
+            [href]="info.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+          >
+            Contactar
+            <i class="pi pi-arrow-right ml-2"></i>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Redes Sociales -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="Síguenos en Redes Sociales"
+      subtitle="Mantente al día con nuestras últimas novedades"
+    ></app-section-title>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+      @for (social of socialLinks; track social.name; let i = $index) {
+        <a
+          [href]="social.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [class]="social.color + ' text-white rounded-2xl p-8 flex flex-col items-center justify-center transition-all transform hover:scale-105 hover:shadow-xl'"
+          data-aos="zoom-in"
+          [attr.data-aos-delay]="i * 100"
+        >
+          <i [class]="social.icon + ' text-5xl mb-4'"></i>
+          <span class="text-xl font-bold">{{ social.name }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Horarios de Atención -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+    <div class="bg-gradient-to-r from-primary-600 to-accent-500 rounded-3xl p-12 text-white text-center shadow-2xl">
+      <i class="pi pi-clock text-6xl mb-6"></i>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Horario de Atención</h2>
+      <p class="text-xl mb-6">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+      <p class="text-lg text-white/90">
+        ¿Necesitas atención urgente? Contáctanos por WhatsApp y te responderemos a la brevedad
+      </p>
+      <button
+        pButton
+        (click)="window.open('https://wa.link/yhfi8d', '_blank')"
+        size="large"
+        class="p-button-secondary mt-8"
+      >
+        Abrir WhatsApp
+        <i class="pi pi-whatsapp ml-2"></i>
+      </button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,187 @@
+<!-- Hero Section -->
+<section class="relative h-96 flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="/assets/images/backgrounds/programs-hero.jpg"
+      alt="Programas"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-primary-600/90 to-accent-400/90"></div>
+  </div>
+  <div class="relative z-10 text-center text-white px-4" data-aos="fade-up">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Nuestros Programas</h1>
+    <p class="text-xl sm:text-2xl text-white/90">Encuentra el viaje perfecto para tu grupo</p>
+  </div>
+</section>
+
+<!-- Selector Section -->
+<section class="py-20 bg-gradient-to-b from-white to-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="Explora Nuestros Programas"
+      subtitle="Selecciona la zona, destino y región de origen para ver los programas disponibles"
+    ></app-section-title>
+
+    <!-- Dropdowns -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
+      <!-- Zona -->
+      <div class="space-y-2">
+        <label class="block text-sm font-semibold text-gray-700">
+          <i class="pi pi-map-marker mr-2 text-primary-600"></i>
+          Zona
+        </label>
+        <p-select
+          [(ngModel)]="selectedZone"
+          [options]="zoneOptions()"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Selecciona una zona"
+          (onChange)="onZoneChange()"
+          [style]="{'width': '100%'}"
+          styleClass="w-full"
+        />
+      </div>
+
+      <!-- Destino -->
+      <div class="space-y-2">
+        <label class="block text-sm font-semibold text-gray-700">
+          <i class="pi pi-compass mr-2 text-primary-600"></i>
+          Destino
+        </label>
+        <p-select
+          [(ngModel)]="selectedDestination"
+          [options]="destinationOptions()"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Selecciona un destino"
+          (onChange)="onDestinationChange()"
+          [disabled]="!selectedZone()"
+          [style]="{'width': '100%'}"
+          styleClass="w-full"
+        />
+      </div>
+
+      <!-- Región de Origen -->
+      <div class="space-y-2">
+        <label class="block text-sm font-semibold text-gray-700">
+          <i class="pi pi-home mr-2 text-primary-600"></i>
+          Región de Origen
+        </label>
+        <p-select
+          [(ngModel)]="selectedRegion"
+          [options]="regionOptions()"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Selecciona tu región"
+          [disabled]="!selectedDestination() || regionOptions().length === 0"
+          [style]="{'width': '100%'}"
+          styleClass="w-full"
+        />
+      </div>
+    </div>
+
+    <!-- Resultados -->
+    @if (availablePrograms().length > 0) {
+      <div class="mt-16">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center" data-aos="fade-up">
+          Programas Disponibles
+          <span class="text-primary-600">({{ availablePrograms().length }})</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          @for (program of availablePrograms(); track program.link; let i = $index) {
+            <div
+              class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-6 border border-gray-100"
+              data-aos="zoom-in"
+              [attr.data-aos-delay]="i * 100"
+            >
+              <!-- Icono -->
+              <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-400 rounded-xl flex items-center justify-center mb-4">
+                <i class="pi pi-file-pdf text-3xl text-white"></i>
+              </div>
+
+              <!-- Título -->
+              <h4 class="text-lg font-bold text-gray-900 mb-3 line-clamp-2">
+                {{ program.name }}
+              </h4>
+
+              <!-- Transporte -->
+              @if (program.transport) {
+                <div class="flex items-center text-sm text-gray-600 mb-4">
+                  <i class="pi pi-car mr-2 text-primary-600"></i>
+                  <span class="font-medium">{{ program.transport }}</span>
+                </div>
+              }
+
+              <!-- Botones -->
+              <div class="flex gap-3">
+                <button
+                  pButton
+                  (click)="openPDF(program)"
+                  size="small"
+                  class="p-button-outlined flex-1"
+                >
+                  <i class="pi pi-eye mr-2"></i>
+                  Ver
+                </button>
+                <button
+                  pButton
+                  (click)="downloadPDF(program)"
+                  size="small"
+                  class="flex-1"
+                >
+                  <i class="pi pi-download mr-2"></i>
+                  Descargar
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else if (selectedZone() && selectedDestination()) {
+      <div class="mt-16 text-center" data-aos="fade-up">
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-12 max-w-2xl mx-auto">
+          <i class="pi pi-info-circle text-6xl text-blue-500 mb-4"></i>
+          <p class="text-lg text-blue-900 font-medium">
+            @if (regionOptions().length > 0 && !selectedRegion()) {
+              Por favor, selecciona una región de origen para ver los programas disponibles.
+            } @else {
+              No hay programas disponibles para esta combinación.
+            }
+          </p>
+        </div>
+      </div>
+    } @else {
+      <div class="mt-16 text-center" data-aos="fade-up">
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-12 max-w-2xl mx-auto">
+          <i class="pi pi-search text-6xl text-gray-400 mb-4"></i>
+          <p class="text-lg text-gray-600 font-medium">
+            Selecciona una zona y destino para explorar nuestros programas
+          </p>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-primary-600 to-accent-500">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+    <i class="pi pi-whatsapp text-6xl text-white mb-6"></i>
+    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+      ¿Necesitas Ayuda para Elegir?
+    </h2>
+    <p class="text-xl text-white/90 mb-8">
+      Nuestro equipo está listo para asesorarte y ayudarte a encontrar el programa perfecto para tu grupo
+    </p>
+    <button
+      pButton
+      (click)="window.open('https://wa.link/yhfi8d', '_blank')"
+      size="large"
+      class="p-button-secondary"
+    >
+      Contactar por WhatsApp
+      <i class="pi pi-whatsapp ml-2"></i>
+    </button>
+  </div>
+</section>

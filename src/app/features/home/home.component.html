@@ -1,0 +1,204 @@
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Video/Imagen de fondo con Parallax -->
+  <div class="absolute inset-0" appParallax [parallaxSpeed]="0.3">
+    <img
+      src="/assets/images/backgrounds/fondo-web.jpg"
+      alt="Giras Indómito"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
+  </div>
+
+  <!-- Contenido del Hero -->
+  <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto" data-aos="fade-up">
+    <img
+      src="/assets/images/logo/logo-web.png"
+      alt="Giras Indómito"
+      class="h-24 sm:h-32 md:h-40 w-auto mx-auto mb-8 brightness-0 invert"
+      data-aos="zoom-in"
+      data-aos-delay="200"
+    />
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6" data-aos="fade-up" data-aos-delay="400">
+      Vive la Aventura de tu Vida
+    </h1>
+    <p class="text-xl sm:text-2xl md:text-3xl mb-8 text-gray-200" data-aos="fade-up" data-aos-delay="600">
+      Giras de Estudio Inolvidables
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="800">
+      <button
+        pButton
+        routerLink="/programs"
+        size="large"
+        class="text-lg"
+      >
+        Ver Programas
+        <i class="pi pi-arrow-right ml-2"></i>
+      </button>
+      <button
+        pButton
+        routerLink="/contact"
+        size="large"
+        class="p-button-outlined p-button-secondary text-lg"
+      >
+        Contáctanos
+        <i class="pi pi-whatsapp ml-2"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <i class="pi pi-angle-down text-white text-3xl"></i>
+  </div>
+</section>
+
+<!-- Sección de Características -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="¿Por qué elegirnos?"
+      subtitle="Comprometidos con la excelencia en cada viaje"
+    ></app-section-title>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="pi pi-shield text-4xl text-primary-600"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Seguridad Garantizada</h3>
+        <p class="text-gray-600">Assist Card 24/7 y personal capacitado en todos nuestros viajes</p>
+      </div>
+
+      <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="pi pi-star text-4xl text-primary-600"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Experiencia</h3>
+        <p class="text-gray-600">Años de trayectoria organizando giras estudiantiles exitosas</p>
+      </div>
+
+      <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="pi pi-heart text-4xl text-primary-600"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Atención Personalizada</h3>
+        <p class="text-gray-600">Cada detalle cuidado para hacer de tu viaje algo memorable</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Destinos -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="Nuestros Destinos"
+      subtitle="Descubre los lugares más increíbles de Chile, Argentina y Brasil"
+    ></app-section-title>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      @for (destination of destinations; track destination.title) {
+        <app-destination-card
+          [title]="destination.title"
+          [description]="destination.description"
+          [image]="destination.image"
+          [badge]="destination.badge"
+          [routerLink]="destination.routerLink"
+          [animation]="'fade-up'"
+        ></app-destination-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Carrusel de Imágenes -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <app-section-title
+      title="Galería de Momentos"
+      subtitle="Recuerdos que duran para siempre"
+    ></app-section-title>
+
+    <div class="mt-12" data-aos="fade-up">
+      <p-carousel
+        [value]="sliderImages"
+        [numVisible]="3"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="px-3">
+            <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+              <img
+                [src]="image"
+                [alt]="'Imagen de galería'"
+                class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonios -->
+<section class="py-20 bg-primary-600 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+        Lo que dicen de nosotros
+      </h2>
+      <p class="text-xl text-primary-100">
+        Testimonios de colegios que confiaron en nosotros
+      </p>
+      <div class="w-24 h-1 bg-white mx-auto mt-6 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      @for (testimonial of testimonials; track testimonial.author; let i = $index) {
+        <div
+          class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-colors"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100"
+        >
+          <i class="pi pi-quote-left text-4xl text-primary-300 mb-4"></i>
+          <p class="text-lg mb-6">{{ testimonial.text }}</p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center mr-4">
+              <i class="pi pi-users text-2xl"></i>
+            </div>
+            <div>
+              <p class="font-bold">{{ testimonial.author }}</p>
+              <p class="text-primary-200 text-sm">{{ testimonial.location }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Final -->
+<section class="py-20 bg-gradient-to-r from-primary-600 to-accent-500">
+  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8" data-aos="zoom-in">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+      ¿Listo para la aventura?
+    </h2>
+    <p class="text-xl text-white/90 mb-8">
+      Cotiza tu viaje ahora y comienza a planificar una experiencia inolvidable
+    </p>
+    <button
+      pButton
+      routerLink="/contact"
+      size="large"
+      class="p-button-secondary text-lg"
+    >
+      Solicitar Cotización
+      <i class="pi pi-send ml-2"></i>
+    </button>
+  </div>
+</section>

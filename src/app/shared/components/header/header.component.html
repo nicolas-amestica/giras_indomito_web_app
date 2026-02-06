@@ -1,0 +1,75 @@
+<div class="w-full bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+        <img
+          src="/assets/images/logo/logo-web.png"
+          alt="Giras Indómito"
+          class="h-12 sm:h-14 w-auto"
+        />
+        <span class="text-xl sm:text-2xl font-bold text-primary-600 hidden sm:block">
+          Giras Indómito
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-1">
+        <a
+          routerLink="/"
+          routerLinkActive="bg-primary-50 text-primary-600"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
+        >
+          <i class="pi pi-home mr-2"></i>
+          Inicio
+        </a>
+        <a
+          routerLink="/services"
+          routerLinkActive="bg-primary-50 text-primary-600"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
+        >
+          <i class="pi pi-briefcase mr-2"></i>
+          Servicios
+        </a>
+        <a
+          routerLink="/programs"
+          routerLinkActive="bg-primary-50 text-primary-600"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
+        >
+          <i class="pi pi-file-pdf mr-2"></i>
+          Programas
+        </a>
+        <a
+          routerLink="/about"
+          routerLinkActive="bg-primary-50 text-primary-600"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
+        >
+          <i class="pi pi-users mr-2"></i>
+          Nosotros
+        </a>
+        <a
+          routerLink="/contact"
+          routerLinkActive="bg-primary-50 text-primary-600"
+          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
+        >
+          <i class="pi pi-envelope mr-2"></i>
+          Contacto
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        pButton
+        class="p-button-text p-button-rounded md:hidden"
+        size="large"
+        (click)="menu.toggle($event)"
+      >
+        <i class="pi pi-bars"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<p-menu #menu [model]="menuItems" [popup]="true" styleClass="w-64"></p-menu>
