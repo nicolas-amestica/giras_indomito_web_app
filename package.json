@@ -1,9 +1,9 @@
 {
-  "name": "app",
+  "name": "giras_indomito_web_app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --no-hmr --port 4400",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
