@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
   <!-- Video/Imagen de fondo con Parallax -->
   <div class="absolute inset-0" appParallax [parallaxSpeed]="0.3">
     <img
@@ -15,41 +15,38 @@
     <img
       src="/assets/images/logo/logo-web.png"
       alt="Giras Indómito"
-      class="h-24 sm:h-32 md:h-40 w-auto mx-auto mb-8 brightness-0 invert"
+      class="h-48 sm:h-56 md:h-72 lg:h-96 w-auto mx-auto mb-8"
+      style="filter: brightness(0) saturate(100%) invert(94%) sepia(99%) saturate(1977%) hue-rotate(9deg) brightness(104%) contrast(106%);"
       data-aos="zoom-in"
       data-aos-delay="200"
     />
-    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6" data-aos="fade-up" data-aos-delay="400">
-      Vive la Aventura de tu Vida
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary-500" data-aos="fade-up" data-aos-delay="400">
+      Dale una vuelta a la aventura
     </h1>
-    <p class="text-xl sm:text-2xl md:text-3xl mb-8 text-gray-200" data-aos="fade-up" data-aos-delay="600">
+    <p class="text-xs sm:text-sm md:text-base mb-10 text-primary-400 font-normal" data-aos="fade-up" data-aos-delay="600">
       Giras de Estudio Inolvidables
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="800">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8" data-aos="fade-up" data-aos-delay="800">
       <button
-        pButton
         routerLink="/programs"
-        size="large"
-        class="text-lg"
+        class="btn btn-primary btn-lg"
       >
         Ver Programas
-        <i class="pi pi-arrow-right ml-2"></i>
+        <i class="pi pi-arrow-right"></i>
       </button>
       <button
-        pButton
         routerLink="/contact"
-        size="large"
-        class="p-button-outlined p-button-secondary text-lg"
+        class="btn btn-outlined-white btn-lg"
       >
         Contáctanos
-        <i class="pi pi-whatsapp ml-2"></i>
+        <i class="pi pi-whatsapp"></i>
       </button>
     </div>
-  </div>
 
-  <!-- Indicador de scroll -->
-  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <i class="pi pi-angle-down text-white text-3xl"></i>
+    <!-- Indicador de scroll -->
+    <div class="animate-bounce mt-4" data-aos="fade-up" data-aos-delay="1000">
+      <i class="pi pi-angle-down text-white text-3xl opacity-80"></i>
+    </div>
   </div>
 </section>
 
@@ -64,7 +61,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
       <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
         <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i class="pi pi-shield text-4xl text-primary-600"></i>
+          <i class="pi pi-shield text-4xl text-secondary-600"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">Seguridad Garantizada</h3>
         <p class="text-gray-600">Assist Card 24/7 y personal capacitado en todos nuestros viajes</p>
@@ -72,7 +69,7 @@
 
       <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
         <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i class="pi pi-star text-4xl text-primary-600"></i>
+          <i class="pi pi-star text-4xl text-secondary-600"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">Experiencia</h3>
         <p class="text-gray-600">Años de trayectoria organizando giras estudiantiles exitosas</p>
@@ -80,7 +77,7 @@
 
       <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
         <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <i class="pi pi-heart text-4xl text-primary-600"></i>
+          <i class="pi pi-heart text-4xl text-secondary-600"></i>
         </div>
         <h3 class="text-xl font-bold mb-3">Atención Personalizada</h3>
         <p class="text-gray-600">Cada detalle cuidado para hacer de tu viaje algo memorable</p>
@@ -146,34 +143,34 @@
 </section>
 
 <!-- Testimonios -->
-<section class="py-20 bg-primary-600 text-white">
+<section class="py-20 bg-secondary-600 text-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12" data-aos="fade-up">
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
         Lo que dicen de nosotros
       </h2>
-      <p class="text-xl text-primary-100">
+      <p class="text-xl text-gray-300">
         Testimonios de colegios que confiaron en nosotros
       </p>
-      <div class="w-24 h-1 bg-white mx-auto mt-6 rounded-full"></div>
+      <div class="w-24 h-1 bg-primary-500 mx-auto mt-6 rounded-full"></div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
       @for (testimonial of testimonials; track testimonial.author; let i = $index) {
         <div
-          class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-colors"
+          class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/20 transition-all border border-primary-500/20 hover:border-primary-500/50"
           data-aos="fade-up"
           [attr.data-aos-delay]="i * 100"
         >
-          <i class="pi pi-quote-left text-4xl text-primary-300 mb-4"></i>
+          <i class="pi pi-quote-left text-4xl text-primary-400 mb-4"></i>
           <p class="text-lg mb-6">{{ testimonial.text }}</p>
           <div class="flex items-center">
-            <div class="w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center mr-4">
-              <i class="pi pi-users text-2xl"></i>
+            <div class="w-12 h-12 bg-primary-500/20 border border-primary-500 rounded-full flex items-center justify-center mr-4">
+              <i class="pi pi-users text-2xl text-primary-500"></i>
             </div>
             <div>
               <p class="font-bold">{{ testimonial.author }}</p>
-              <p class="text-primary-200 text-sm">{{ testimonial.location }}</p>
+              <p class="text-gray-400 text-sm">{{ testimonial.location }}</p>
             </div>
           </div>
         </div>
@@ -183,22 +180,21 @@
 </section>
 
 <!-- Call to Action Final -->
-<section class="py-20 bg-gradient-to-r from-primary-600 to-accent-500">
-  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8" data-aos="zoom-in">
+<section class="py-20 bg-gradient-to-r from-secondary-800 via-secondary-700 to-secondary-800 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMTUsMjU1LDAsMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10" data-aos="zoom-in">
     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
       ¿Listo para la aventura?
     </h2>
-    <p class="text-xl text-white/90 mb-8">
+    <p class="text-xl text-gray-300 mb-8">
       Cotiza tu viaje ahora y comienza a planificar una experiencia inolvidable
     </p>
     <button
-      pButton
       routerLink="/contact"
-      size="large"
-      class="p-button-secondary text-lg"
+      class="btn btn-primary btn-lg"
     >
       Solicitar Cotización
-      <i class="pi pi-send ml-2"></i>
+      <i class="pi pi-send"></i>
     </button>
   </div>
 </section>

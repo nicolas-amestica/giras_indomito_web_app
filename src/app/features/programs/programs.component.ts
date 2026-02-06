@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SectionTitleComponent } from '../../shared/components/section-title/section-title.component';
 import { SelectModule } from 'primeng/select';
 import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { DESTINATIONS } from './constants/programs.constant';
 import { ProgramZone, ProgramDestination, ProgramRegion, ProgramFile } from '../../shared/models/program.interface';
@@ -21,15 +20,11 @@ interface DropdownOption {
     FormsModule,
     SectionTitleComponent,
     SelectModule,
-    CardModule,
-    ButtonModule
+    CardModule
   ],
   templateUrl: './programs.component.html'
 })
 export class ProgramsComponent {
-  // Referencia a window para usar en el template
-  readonly window = window;
-
   // Constante de programas
   readonly programs = DESTINATIONS;
 
@@ -116,14 +111,25 @@ export class ProgramsComponent {
 
   // Abrir PDF en nueva pestaña
   openPDF(file: ProgramFile): void {
-    window.open(file.link, '_blank');
+    if (typeof window !== 'undefined') {
+      window.open(file.link, '_blank');
+    }
   }
 
   // Descargar PDF
   downloadPDF(file: ProgramFile): void {
-    const link = document.createElement('a');
-    link.href = file.link;
-    link.download = file.name + '.pdf';
-    link.click();
+    if (typeof document !== 'undefined') {
+      const link = document.createElement('a');
+      link.href = file.link;
+      link.download = file.name + '.pdf';
+      link.click();
+    }
+  }
+
+  // Abrir WhatsApp
+  openWhatsApp(): void {
+    if (typeof window !== 'undefined') {
+      window.open('https://wa.link/yhfi8d', '_blank');
+    }
   }
 }

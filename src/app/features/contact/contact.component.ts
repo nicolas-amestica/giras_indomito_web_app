@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import { SectionTitleComponent } from '../../shared/components/section-title/section-title.component';
 import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [SectionTitleComponent, CardModule, ButtonModule],
+  imports: [SectionTitleComponent, CardModule],
   templateUrl: './contact.component.html'
 })
 export class ContactComponent {
-  // Referencia a window para usar en el template
-  readonly window = window;
-
   contactInfo = [
     {
       icon: 'pi pi-envelope',
@@ -54,4 +50,10 @@ export class ContactComponent {
       color: 'bg-green-600 hover:bg-green-700'
     }
   ];
+
+  openWhatsApp(): void {
+    if (typeof window !== 'undefined') {
+      window.open('https://wa.link/yhfi8d', '_blank');
+    }
+  }
 }

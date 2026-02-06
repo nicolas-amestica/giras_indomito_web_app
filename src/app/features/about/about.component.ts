@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { SectionTitleComponent } from '../../shared/components/section-title/section-title.component';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [SectionTitleComponent],
+  imports: [RouterLink, SectionTitleComponent],
   templateUrl: './about.component.html'
 })
 export class AboutComponent {

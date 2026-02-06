@@ -1,7 +1,6 @@
 import { Component, PLATFORM_ID, inject, OnInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { SectionTitleComponent } from '../../shared/components/section-title/section-title.component';
 import { DestinationCardComponent } from '../../shared/components/card/destination-card.component';
@@ -13,7 +12,6 @@ import { register } from 'swiper/element/bundle';
   standalone: true,
   imports: [
     RouterLink,
-    ButtonModule,
     CarouselModule,
     SectionTitleComponent,
     DestinationCardComponent,

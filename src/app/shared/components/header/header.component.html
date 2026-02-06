@@ -1,75 +1,113 @@
-<div class="w-full bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a routerLink="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-        <img
-          src="/assets/images/logo/logo-web.png"
-          alt="Giras Indómito"
-          class="h-12 sm:h-14 w-auto"
-        />
-        <span class="text-xl sm:text-2xl font-bold text-primary-600 hidden sm:block">
-          Giras Indómito
-        </span>
-      </a>
+<div class="apple-navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/" class="logo-link">
+      <img
+        src="/assets/images/logo/logo-web.png"
+        alt="Giras Indómito"
+        class="logo-image"
+      />
+    </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-1">
-        <a
-          routerLink="/"
-          routerLinkActive="bg-primary-50 text-primary-600"
-          [routerLinkActiveOptions]="{exact: true}"
-          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
-        >
-          <i class="pi pi-home mr-2"></i>
-          Inicio
-        </a>
-        <a
-          routerLink="/services"
-          routerLinkActive="bg-primary-50 text-primary-600"
-          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
-        >
-          <i class="pi pi-briefcase mr-2"></i>
-          Servicios
-        </a>
-        <a
-          routerLink="/programs"
-          routerLinkActive="bg-primary-50 text-primary-600"
-          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
-        >
-          <i class="pi pi-file-pdf mr-2"></i>
-          Programas
-        </a>
-        <a
-          routerLink="/about"
-          routerLinkActive="bg-primary-50 text-primary-600"
-          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
-        >
-          <i class="pi pi-users mr-2"></i>
-          Nosotros
-        </a>
-        <a
-          routerLink="/contact"
-          routerLinkActive="bg-primary-50 text-primary-600"
-          class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors font-medium"
-        >
-          <i class="pi pi-envelope mr-2"></i>
-          Contacto
-        </a>
-      </nav>
-
-      <!-- Mobile Menu Button -->
-      <button
-        pButton
-        class="p-button-text p-button-rounded md:hidden"
-        size="large"
-        (click)="menu.toggle($event)"
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="nav-link"
       >
-        <i class="pi pi-bars"></i>
-      </button>
-    </div>
+        Inicio
+      </a>
+      <a
+        routerLink="/services"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Servicios
+      </a>
+      <a
+        routerLink="/programs"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Programas
+      </a>
+      <a
+        routerLink="/about"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Nosotros
+      </a>
+      <a
+        routerLink="/contact"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Contacto
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="mobile-menu-button"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="isMobileMenuOpen"
+      aria-label="Toggle menu"
+    >
+      <span class="menu-icon" [class.open]="isMobileMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
   </div>
 </div>
 
-<!-- Mobile Menu -->
-<p-menu #menu [model]="menuItems" [popup]="true" styleClass="w-64"></p-menu>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()">
+  <nav class="mobile-nav" (click)="$event.stopPropagation()">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Inicio
+    </a>
+    <a
+      routerLink="/services"
+      routerLinkActive="active"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Servicios
+    </a>
+    <a
+      routerLink="/programs"
+      routerLinkActive="active"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Programas
+    </a>
+    <a
+      routerLink="/about"
+      routerLinkActive="active"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Nosotros
+    </a>
+    <a
+      routerLink="/contact"
+      routerLinkActive="active"
+      class="mobile-nav-link"
+      (click)="closeMobileMenu()"
+    >
+      Contacto
+    </a>
+  </nav>
+</div>

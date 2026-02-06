@@ -33,16 +33,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #2D2D2D;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #D7FF00;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #ABCC00;
 }
 
 /* Clases de utilidad custom */
@@ -76,5 +76,121 @@ html {
 }
 
 .gradient-overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+  background: linear-gradient(180deg, rgba(45,45,45,0) 0%, rgba(45,45,45,0.9) 100%);
+}
+
+/* Custom Button Styles - Ultra Minimalist & Clean */
+.btn {
+  @apply inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold transition-all duration-500 ease-out focus:outline-none;
+  position: relative;
+  font-size: 0.9375rem;
+  letter-spacing: 0.025em;
+  border-radius: 0.75rem;
+  text-transform: none;
+}
+
+.btn-primary {
+  background: #D7FF00;
+  color: #2D2D2D;
+  border: 2px solid #D7FF00;
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background: #E7FF33;
+  border-color: #E7FF33;
+  box-shadow: 0 0 0 4px rgba(215, 255, 0, 0.1);
+}
+
+.btn-primary:active {
+  background: #ABCC00;
+  border-color: #ABCC00;
+  box-shadow: 0 0 0 2px rgba(215, 255, 0, 0.15);
+}
+
+.btn-secondary {
+  background: #2D2D2D;
+  color: #D7FF00;
+  border: 2px solid #D7FF00;
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: #3D3D3D;
+  border-color: #E7FF33;
+  color: #E7FF33;
+  box-shadow: 0 0 0 4px rgba(215, 255, 0, 0.08);
+}
+
+.btn-secondary:active {
+  background: #1A1A1A;
+  box-shadow: 0 0 0 2px rgba(215, 255, 0, 0.12);
+}
+
+.btn-outlined {
+  background: transparent;
+  color: #D7FF00;
+  border: 2px solid #D7FF00;
+  box-shadow: none;
+}
+
+.btn-outlined:hover {
+  background: #D7FF00;
+  color: #2D2D2D;
+  border-color: #D7FF00;
+}
+
+.btn-outlined:active {
+  background: #ABCC00;
+  border-color: #ABCC00;
+}
+
+.btn-outlined-white {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.btn-outlined-white:hover {
+  background: #D7FF00;
+  color: #2D2D2D;
+  border-color: #D7FF00;
+  box-shadow: 0 0 0 4px rgba(215, 255, 0, 0.1);
+}
+
+.btn-outlined-white:active {
+  background: #ABCC00;
+  border-color: #ABCC00;
+}
+
+.btn-sm {
+  @apply px-6 py-2.5 text-sm gap-2;
+  font-size: 0.875rem;
+  border-radius: 0.625rem;
+}
+
+.btn-lg {
+  @apply px-10 py-5 text-base gap-3.5;
+  font-size: 1rem;
+  border-radius: 0.875rem;
+}
+
+.btn i {
+  transition: transform 0.3s ease;
+  font-size: 1.1em;
+}
+
+.btn:hover i {
+  transform: translateX(3px);
+}
+
+.btn:disabled {
+  @apply opacity-35 cursor-not-allowed;
+  box-shadow: none !important;
+}
+
+.btn:disabled:hover {
+  transform: none !important;
 }

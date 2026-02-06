@@ -30,7 +30,7 @@
           [attr.data-aos-delay]="i * 100"
         >
           <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i [class]="info.icon + ' text-4xl text-primary-600'"></i>
+            <i [class]="info.icon + ' text-4xl text-secondary-600'"></i>
           </div>
           <h3 class="text-xl font-bold text-gray-900 mb-3">{{ info.title }}</h3>
           <p class="text-gray-600 mb-6">{{ info.value }}</p>
@@ -38,10 +38,10 @@
             [href]="info.link"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-semibold transition-colors"
           >
             Contactar
-            <i class="pi pi-arrow-right ml-2"></i>
+            <i class="pi pi-arrow-right"></i>
           </a>
         </div>
       }
@@ -78,21 +78,19 @@
 <!-- Horarios de Atención -->
 <section class="py-20">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
-    <div class="bg-gradient-to-r from-primary-600 to-accent-500 rounded-3xl p-12 text-white text-center shadow-2xl">
-      <i class="pi pi-clock text-6xl mb-6"></i>
+    <div class="bg-gradient-to-r from-secondary-800 via-secondary-700 to-secondary-800 rounded-3xl p-12 text-white text-center shadow-2xl border border-primary-500/20">
+      <i class="pi pi-clock text-6xl text-primary-500 mb-6"></i>
       <h2 class="text-3xl sm:text-4xl font-bold mb-4">Horario de Atención</h2>
       <p class="text-xl mb-6">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
-      <p class="text-lg text-white/90">
+      <p class="text-lg text-gray-300">
         ¿Necesitas atención urgente? Contáctanos por WhatsApp y te responderemos a la brevedad
       </p>
       <button
-        pButton
-        (click)="window.open('https://wa.link/yhfi8d', '_blank')"
-        size="large"
-        class="p-button-secondary mt-8"
+        (click)="openWhatsApp()"
+        class="btn btn-primary btn-lg mt-8"
       >
         Abrir WhatsApp
-        <i class="pi pi-whatsapp ml-2"></i>
+        <i class="pi pi-whatsapp"></i>
       </button>
     </div>
   </div>
