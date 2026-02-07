@@ -1,0 +1,102 @@
+// Estilos personalizados para los p-select
+::ng-deep {
+  .programs-select {
+    // Estilos del input/trigger del select
+    .p-select {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+      &:hover:not(.p-disabled) {
+        border-color: #ABCC00;
+        box-shadow: 0 4px 6px rgba(171, 204, 0, 0.15);
+      }
+
+      &.p-focus {
+        border-color: #D7FF00;
+        box-shadow: 0 0 0 4px rgba(215, 255, 0, 0.2);
+      }
+
+      &.p-disabled {
+        background: #f9fafb;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      .p-select-label {
+        padding: 0.875rem 1rem;
+        color: #1f2937;
+        font-weight: 500;
+
+        &.p-placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .p-select-dropdown {
+        color: #809900;
+      }
+    }
+
+    // Estilos del panel/dropdown
+    .p-select-overlay {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-top: 8px;
+
+      .p-select-list {
+        padding: 0.5rem;
+
+        .p-select-option {
+          padding: 0.75rem 1rem;
+          border-radius: 8px;
+          margin-bottom: 2px;
+          color: #374151;
+          font-weight: 500;
+          transition: all 0.2s ease;
+
+          &:hover:not(.p-disabled):not(.p-select-option-selected) {
+            background: #f3f4f6;
+            color: #1f2937;
+          }
+
+          &.p-select-option-selected {
+            background: linear-gradient(135deg, #D7FF00 0%, #ABCC00 100%);
+            color: #1A1A1A;
+            font-weight: 600;
+
+            &:hover {
+              background: linear-gradient(135deg, #ABCC00 0%, #809900 100%);
+              color: #1A1A1A;
+            }
+          }
+
+          &.p-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+
+  // Animación de entrada del panel
+  .p-select-overlay-enter {
+    animation: select-fade-in 0.2s ease-out;
+  }
+
+  @keyframes select-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

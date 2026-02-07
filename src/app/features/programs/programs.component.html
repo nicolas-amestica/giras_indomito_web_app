@@ -8,7 +8,7 @@
     />
     <div class="absolute inset-0 bg-gradient-to-b from-secondary-800/90 to-secondary-600/90"></div>
   </div>
-  <div class="relative z-10 text-center text-white px-4" data-aos="fade-up">
+  <div class="relative z-10 text-center text-white px-4">
     <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Nuestros Programas</h1>
     <p class="text-xl sm:text-2xl text-gray-200">Encuentra el viaje perfecto para tu grupo</p>
   </div>
@@ -20,10 +20,11 @@
     <app-section-title
       title="Explora Nuestros Programas"
       subtitle="Selecciona la zona, destino y región de origen para ver los programas disponibles"
+      animation=""
     ></app-section-title>
 
-    <!-- Dropdowns -->
-    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up">
+    <!-- select -->
+    <div class="mt-12 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10" data-aos="fade-up">
       <!-- Zona -->
       <div class="space-y-2">
         <label class="block text-sm font-semibold text-gray-700">
@@ -38,7 +39,7 @@
           placeholder="Selecciona una zona"
           (onChange)="onZoneChange()"
           [style]="{'width': '100%'}"
-          styleClass="w-full"
+          styleClass="w-full programs-select"
         />
       </div>
 
@@ -57,7 +58,7 @@
           (onChange)="onDestinationChange()"
           [disabled]="!selectedZone()"
           [style]="{'width': '100%'}"
-          styleClass="w-full"
+          styleClass="w-full programs-select"
         />
       </div>
 
@@ -75,7 +76,7 @@
           placeholder="Selecciona tu región"
           [disabled]="!selectedDestination() || regionOptions().length === 0"
           [style]="{'width': '100%'}"
-          styleClass="w-full"
+          styleClass="w-full programs-select"
         />
       </div>
     </div>
@@ -97,7 +98,7 @@
             >
               <!-- Icono -->
               <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-400 rounded-xl flex items-center justify-center mb-4">
-                <i class="pi pi-file-pdf text-3xl text-white"></i>
+                <i class="pi pi-file-pdf text-3xl text-black"></i>
               </div>
 
               <!-- Título -->
@@ -119,8 +120,8 @@
                   (click)="openPDF(program)"
                   class="btn btn-outlined btn-sm flex-1"
                 >
-                  <i class="pi pi-eye"></i>
-                  Ver
+                    <i class="pi pi-eye text-black"></i>
+                  <span class="text-black">Ver</span>
                 </button>
                 <button
                   (click)="downloadPDF(program)"

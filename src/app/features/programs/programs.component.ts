@@ -22,7 +22,8 @@ interface DropdownOption {
     SelectModule,
     CardModule
   ],
-  templateUrl: './programs.component.html'
+  templateUrl: './programs.component.html',
+  styleUrl: './programs.component.scss'
 })
 export class ProgramsComponent {
   // Constante de programas
