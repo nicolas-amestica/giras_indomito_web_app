@@ -1,3 +1,6 @@
+/* Importar fuentes oficiales de la marca */
+@import './styles/fonts.css';
+
 /* Importar PrimeNG primero */
 @import 'primeicons/primeicons.css';
 
@@ -17,7 +20,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -22,6 +22,12 @@ import { register } from 'swiper/element/bundle';
 export class HomeComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
 
+  // Renderizar carousel solo en el navegador para evitar problemas con Event Replay
+  isBrowser = false;
+
+  // Deshabilitar autoplay en SSR para evitar que la aplicación quede inestable
+  carouselAutoplayInterval: number | undefined = undefined;
+
   sliderImages = [
     '/assets/images/slider/web-galeria-1.jpg',
     '/assets/images/slider/web-galeria-2.jpg',
@@ -93,7 +99,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      this.isBrowser = true;
       register();
+      // Habilitar autoplay solo en el navegador (no durante SSR)
+      this.carouselAutoplayInterval = 3000;
     }
   }
 }

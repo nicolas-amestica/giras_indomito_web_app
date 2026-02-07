@@ -25,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
       <!-- Contenido -->
       <div class="relative h-full flex flex-col justify-end p-6 text-white">
         @if (badge) {
-          <span class="inline-block px-3 py-1 bg-primary-500 text-white text-sm font-semibold rounded-full mb-3 w-fit">
+          <span class="inline-block px-3 py-1 bg-primary-500 text-black text-sm font-semibold rounded-full mb-3 w-fit">
             {{ badge }}
           </span>
         }

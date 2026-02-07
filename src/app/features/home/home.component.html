@@ -11,22 +11,19 @@
   </div>
 
   <!-- Contenido del Hero -->
-  <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto" data-aos="fade-up">
+  <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
     <img
-      src="/assets/images/logo/logo-web.png"
+      src="/assets/images/logo/logo-web-large.png"
       alt="Giras Indómito"
       class="h-48 sm:h-56 md:h-72 lg:h-96 w-auto mx-auto mb-8"
       style="filter: brightness(0) saturate(100%) invert(94%) sepia(99%) saturate(1977%) hue-rotate(9deg) brightness(104%) contrast(106%);"
-      data-aos="zoom-in"
-      data-aos-delay="200"
+      width="753"
+      height="384"
     />
-    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary-500" data-aos="fade-up" data-aos-delay="400">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-primary-500">
       Dale una vuelta a la aventura
     </h1>
-    <p class="text-xs sm:text-sm md:text-base mb-10 text-primary-400 font-normal" data-aos="fade-up" data-aos-delay="600">
-      Giras de Estudio Inolvidables
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8" data-aos="fade-up" data-aos-delay="800">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
       <button
         routerLink="/programs"
         class="btn btn-primary btn-lg"
@@ -44,7 +41,7 @@
     </div>
 
     <!-- Indicador de scroll -->
-    <div class="animate-bounce mt-4" data-aos="fade-up" data-aos-delay="1000">
+    <div class="animate-bounce mt-4">
       <i class="pi pi-angle-down text-white text-3xl opacity-80"></i>
     </div>
   </div>
@@ -96,14 +93,14 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
       @for (destination of destinations; track destination.title) {
-        <app-destination-card
-          [title]="destination.title"
-          [description]="destination.description"
-          [image]="destination.image"
-          [badge]="destination.badge"
-          [routerLink]="destination.routerLink"
-          [animation]="'fade-up'"
-        ></app-destination-card>
+      <app-destination-card
+        [title]="destination.title"
+        [description]="destination.description"
+        [image]="destination.image"
+        [badge]="destination.badge"
+        [routerLink]="destination.routerLink"
+        [animation]="'fade-up'"
+      ></app-destination-card>
       }
     </div>
   </div>
@@ -118,26 +115,41 @@
     ></app-section-title>
 
     <div class="mt-12" data-aos="fade-up">
-      <p-carousel
-        [value]="sliderImages"
-        [numVisible]="3"
-        [numScroll]="1"
-        [circular]="true"
-        [autoplayInterval]="3000"
-        [responsiveOptions]="responsiveOptions"
-      >
-        <ng-template let-image pTemplate="item">
-          <div class="px-3">
-            <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+      @if (isBrowser) {
+        <p-carousel
+          [value]="sliderImages"
+          [numVisible]="3"
+          [numScroll]="1"
+          [circular]="true"
+          [autoplayInterval]="carouselAutoplayInterval"
+          [responsiveOptions]="responsiveOptions"
+        >
+          <ng-template let-image pTemplate="item">
+            <div class="px-3">
+              <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                <img
+                  [src]="image"
+                  [alt]="'Imagen de galería'"
+                  class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      } @else {
+        <!-- Placeholder durante SSR -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          @for (image of sliderImages.slice(0, 3); track image) {
+            <div class="rounded-2xl overflow-hidden shadow-lg">
               <img
                 [src]="image"
                 [alt]="'Imagen de galería'"
-                class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
+                class="w-full h-64 object-cover"
               />
             </div>
-          </div>
-        </ng-template>
-      </p-carousel>
+          }
+        </div>
+      }
     </div>
   </div>
 </section>
