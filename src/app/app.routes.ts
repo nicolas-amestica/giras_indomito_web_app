@@ -12,11 +12,6 @@ export const routes: Routes = [
     title: 'Servicios - Giras Indómito'
   },
   {
-    path: 'programs',
-    loadComponent: () => import('./features/programs/programs.component').then(m => m.ProgramsComponent),
-    title: 'Programas - Giras Indómito'
-  },
-  {
     path: 'contact',
     loadComponent: () => import('./features/contact/contact.component').then(m => m.ContactComponent),
     title: 'Contacto - Giras Indómito'
