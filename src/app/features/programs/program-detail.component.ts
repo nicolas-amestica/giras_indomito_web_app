@@ -1,0 +1,23 @@
+import {Component,computed,inject,input} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {TOUR_PROGRAMS} from './programs.data';
+import {ScrollStoryDirective} from '../../shared/directives/scroll-story.directive';
+@Component({
+ selector:'app-program-detail',standalone:true,imports:[RouterLink,ScrollStoryDirective],
+ template:`
+ <main appScrollStory class="program">
+ @if(program();as tour) {
+  <section class="hero"><img [src]="tour.image" [alt]="tour.title" fetchpriority="high"><div class="shade"></div><div class="intro"><p class="eyebrow">PROGRAMA REFERENCIAL / {{tour.category}}</p><h1>{{tour.title}}</h1><p>{{tour.summary}}</p><a routerLink="/contact" [queryParams]="{programa:tour.slug}" class="action">Solicitar cotización ↗</a></div></section>
+  <section class="content light"><p class="eyebrow">01 / Por qué elegir esta ruta</p><h2>Una experiencia para descubrir en grupo.</h2><div class="tiles">@for(highlight of tour.highlights;track highlight;let i=$index){<article class="tile reveal"><small>0{{i+1}}</small><h3>{{highlight}}</h3></article>}</div></section>
+  <section class="content dark"><p class="eyebrow">02 / Ejemplo de recorrido</p><h2>Imagina los días de tu gira.</h2><p class="notice">Este recorrido es ilustrativo, no constituye una oferta con actividades, duración o prestaciones confirmadas.</p><ol class="days">@for(day of tour.suggestedDays;track $index){<li class="reveal"><span>DÍA {{ $index+1 }}</span><p>{{day}}</p></li>}</ol></section>
+  <section class="content light"><p class="eyebrow">03 / Antes de contratar</p><h2>Todo claro desde el principio.</h2><p class="notice">{{tour.notes}}</p><div class="tiles"><article class="tile"><h3>Servicios incluidos</h3><p>Se detallan en la propuesta: transporte, alojamiento, alimentación, actividades y coordinación que correspondan.</p></article><article class="tile"><h3>Condiciones del viaje</h3><p>Los precios, cupos, modificaciones, pagos y devoluciones se informan en el proceso de cotización y contratación.</p></article><article class="tile"><h3>Documentación</h3><p>En viajes internacionales, revisa permisos, documentos y exigencias vigentes, especialmente cuando viajan menores.</p></article></div></section>
+  <section class="closing"><p class="eyebrow">¿ES LA RUTA QUE IMAGINAS?</p><h2>Diseñemos una propuesta para tu curso.</h2><a routerLink="/contact" [queryParams]="{programa:tour.slug}" class="action">Cotizar este programa ↗</a></section>
+ } @else {<section class="content dark"><h1>Programa no disponible</h1><a routerLink="/services" class="action">Ver experiencias ↗</a></section>}
+ </main>
+ `,
+ styles:[`:host{display:block;font-family:Avenir,system-ui,sans-serif;background:#172019;color:#fff}.hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;padding:10vw 7vw 7vw;isolation:isolate}.hero img,.shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.shade{z-index:-1;background:linear-gradient(0deg,#142019 2%,rgba(0,0,0,.22))}.intro{max-width:850px}.hero .intro>p:last-of-type{font-size:1.3rem;line-height:1.7;margin:28px 0}.eyebrow{color:#d7ff00;font-size:.8rem;letter-spacing:.2em;font-weight:800;margin-bottom:25px}h1,h2,h3,p{margin:0}h1{font-size:clamp(3.5rem,8vw,8rem);letter-spacing:-.06em;line-height:1}h2{font-size:clamp(2.6rem,5vw,5.5rem);letter-spacing:-.05em;line-height:1.07}h3{font-size:clamp(1.5rem,2vw,2.1rem)}.content{padding:110px 7vw}.light{background:#f3f4ed;color:#18241a}.light .eyebrow{color:#5e7800}.dark{background:#243126}.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:60px 0}.tile{border:1px solid #c5d0c0;padding:35px;min-height:200px}.tile small{color:#647d00;font-weight:900}.tile h3{margin-top:25px}.tile p,.notice{max-width:850px;font-size:1.1rem;line-height:1.75;margin-top:25px}.days{padding:0;margin:50px 0;list-style:none;max-width:1000px}.days li{padding:26px 0;border-bottom:1px solid #6f806b;display:grid;grid-template-columns:150px 1fr;gap:35px}.days span{color:#d7ff00;font-weight:800}.days p{font-size:1.2rem}.action{display:inline-block;padding:17px 28px;background:#d7ff00;color:#162017;text-decoration:none;font-weight:800;border-radius:4px;margin-top:25px}.closing{text-align:center;padding:110px 24px;background:#d7ff00;color:#172018}.closing .eyebrow{color:#587000}.closing h2{max-width:850px;margin:auto}.closing .action{background:#172018;color:#d7ff00}@media(max-width:760px){.hero{padding:130px 24px 70px;min-height:620px}.content{padding:75px 24px}.tiles{grid-template-columns:1fr}.days li{grid-template-columns:1fr;gap:12px}}`]
+})
+export class ProgramDetailComponent {
+ readonly slug=input.required<string>();
+ readonly program=computed(()=>TOUR_PROGRAMS.find(x=>x.slug===this.slug()));
+}
