@@ -107,10 +107,10 @@ import { RouterLink } from '@angular/router';
         <details><summary>¿Qué tipos de viajes organizan?</summary><p>Nos enfocamos en giras de estudio, viajes grupales y experiencias turísticas que pueden adaptarse a las características de cada grupo.</p></details>
         <details><summary>¿Puedo solicitar una propuesta personalizada?</summary><p>Sí. Puedes contarnos el destino que tienes en mente, las fechas aproximadas y el número de pasajeros para comenzar a planificar.</p></details>
         <details><summary>¿Organizan viajes nacionales e internacionales?</summary><p>Presentamos alternativas dentro de Chile y en destinos de Sudamérica. La disponibilidad y los servicios específicos se confirman en cada propuesta.</p></details>
-        <details><summary>¿Dónde puedo gestionar mis pagos?</summary><p>Si ya tienes un viaje contratado, utiliza nuestro acceso al portal de pagos. Los pagos se administran en una plataforma externa a este sitio informativo.</p><a href="http://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="text-link">Ir al portal de pagos ↗</a></details>
+        <details><summary>¿Dónde puedo gestionar mis pagos?</summary><p>Si ya tienes un viaje contratado, utiliza nuestro acceso al portal de pagos. Los pagos se administran en una plataforma externa a este sitio informativo.</p><a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="text-link">Ir al portal de pagos ↗</a></details>
       </div>
     </section>
-    <section class="payments-banner"><div><p class="eyebrow">09 / PARA NUESTROS VIAJEROS</p><h2>Tu aventura también se organiza en línea.</h2><p>¿Ya estás preparando tu próximo viaje con nosotros? Accede al portal de pagos desde aquí.</p></div><a class="action" href="http://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer">Acceder a pagos ↗</a></section>
+    <section class="payments-banner"><div><p class="eyebrow">09 / PARA NUESTROS VIAJEROS</p><h2>Tu aventura también se organiza en línea.</h2><p>¿Ya estás preparando tu próximo viaje con nosotros? Accede al portal de pagos desde aquí.</p></div><a class="action" href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer">Acceder a pagos ↗</a></section>
     <section class="closing">
       <p class="eyebrow">10 / COMENCEMOS</p>
       <h2>Hay historias que merecen vivirse.</h2>
@@ -209,13 +209,16 @@ export class ImmersiveHomeComponent implements AfterViewInit {
     const material = new THREE.PointsMaterial({color:0xd7ff00,size:.035,transparent:true,opacity:.75});
     const particles = new THREE.Points(geometry,material);
     scene.add(particles);
+    let isVisible = true;
+    const visibilityObserver = new IntersectionObserver(entries => { isVisible = !!entries[0]?.isIntersecting; });
+    visibilityObserver.observe(host);
     const resize = () => { const w=host.clientWidth,h=host.clientHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix(); };
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(host);
     let frame=0;
-    const animate = () => { particles.rotation.y += .00025;renderer.render(scene,camera);frame=requestAnimationFrame(animate); };
+    const animate = () => { if (isVisible && !document.hidden) { particles.rotation.y += .00025;renderer.render(scene,camera); }frame=requestAnimationFrame(animate); };
     animate();
-    this.destroyRef.onDestroy(() => { cancelAnimationFrame(frame);observer.disconnect();geometry.dispose();material.dispose();renderer.dispose(); });
+    this.destroyRef.onDestroy(() => { cancelAnimationFrame(frame);observer.disconnect();visibilityObserver.disconnect();geometry.dispose();material.dispose();renderer.dispose(); });
   }
 }
