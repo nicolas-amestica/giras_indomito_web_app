@@ -15,7 +15,7 @@ export class FooterComponent {
     {
       name: 'Facebook',
       icon: 'pi pi-facebook',
-      url: 'https://www.facebook.com/giras.indomito',
+      url: 'https://www.facebook.com/share/1DvCVBPrhx/',
       color: 'hover:text-primary-500'
     },
     {
