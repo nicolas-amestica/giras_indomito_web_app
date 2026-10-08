@@ -1,52 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-
-@Component({
-  selector: 'app-services',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './services.component.html'
-})
+import {Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {ScrollStoryDirective} from '../../shared/directives/scroll-story.directive';
+@Component({selector:'app-services',standalone:true,imports:[RouterLink,ScrollStoryDirective],templateUrl:'./services.component.html',styles:[`:host{display:block;background:#171e19;color:#fff;font-family:Avenir,system-ui,sans-serif}.hero{position:relative;min-height:78svh;display:flex;align-items:end;padding:clamp(40px,8vw,120px);isolation:isolate;overflow:hidden}.hero img,.hero .shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}.hero .shade{z-index:-1;background:linear-gradient(0deg,#121c17 0%,rgba(13,25,18,.18) 95%)}.hero>div:last-child{max-width:1050px}.eyebrow{font-size:.76rem;letter-spacing:.23em;color:#d7ff00;font-weight:800;text-transform:uppercase;margin-bottom:20px}h1,h2,h3,p{margin:0}h1{font-size:clamp(3.8rem,9vw,9rem);line-height:.98;letter-spacing:-.065em}h2{font-size:clamp(2.7rem,5.4vw,6rem);line-height:1.06;letter-spacing:-.055em}h3{font-size:clamp(1.5rem,2.2vw,2.5rem);line-height:1.15;letter-spacing:-.035em}p{line-height:1.75}.hero .lead{font-size:clamp(1.1rem,1.7vw,1.45rem);margin-top:30px;max-width:700px}.section{padding:clamp(75px,9vw,150px) 7vw}.section.light{background:#f3f4ed;color:#1c281f}.section.muted{background:#243228}.intro{max-width:1000px}.intro>p:last-child{max-width:750px;font-size:1.2rem;margin-top:26px;opacity:.8}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:60px}.panel{border:1px solid rgba(128,149,124,.45);padding:36px;min-height:260px}.panel>span{display:block;color:#a7c800;font-size:.8rem;font-weight:800;letter-spacing:.15em;margin-bottom:30px}.panel p{margin-top:20px;opacity:.78}.light .panel{border-color:#c3cec0}.split{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center}.split img{width:100%;height:min(68vh,650px);object-fit:cover}.split p{font-size:1.16rem;margin-top:22px;opacity:.82}.action{display:inline-flex;align-items:center;justify-content:center;gap:15px;background:#d7ff00;color:#172018;padding:17px 25px;text-decoration:none;font-weight:800;border-radius:4px;margin-top:32px;transition:transform .25s}.action:hover{transform:translateY(-4px)}.closing{text-align:center;background:#d7ff00;color:#172018;padding:120px 24px}.closing h2{max-width:900px;margin:auto}.closing .eyebrow{color:#546900}.closing .action{background:#172018;color:#d7ff00}.line-list{margin:40px 0 0;padding:0;list-style:none}.line-list li{padding:20px 0;border-bottom:1px solid rgba(130,150,125,.35);font-size:1.15rem}.line-list li:before{content:'↗';color:#a5c700;margin-right:18px}.photo-band{height:85svh;min-height:450px;position:relative;overflow:hidden}.photo-band img{width:100%;height:100%;object-fit:cover}.photo-band blockquote{position:absolute;bottom:8%;left:7%;font-size:clamp(2.8rem,6vw,7rem);line-height:1.02;letter-spacing:-.055em;max-width:1000px;font-weight:800;text-shadow:0 2px 35px #000}.faq details{padding:22px 0;border-bottom:1px solid #81917d}.faq summary{font-size:1.25rem;font-weight:700;cursor:pointer}.faq details p{margin-top:16px;opacity:.8}.reveal{will-change:transform,opacity}@media(max-width:800px){.hero{min-height:65svh;padding:100px 24px 60px}.section{padding:75px 24px}.grid,.split{grid-template-columns:1fr}.split img{height:350px}.panel{min-height:auto}.photo-band{height:65svh}.photo-band blockquote{left:24px;right:24px}}@media(prefers-reduced-motion:reduce){.reveal{will-change:auto}.action{transition:none}}`]})
 export class ServicesComponent {
-  destinations = [
-    {
-      name: 'San Carlos de Bariloche, Argentina',
-      image: '/assets/images/content/services/foto_web_1.jpg',
-      description: 'La ciudad de Bariloche ofrece una experiencia única de turismo aventura en la majestuosa Patagonia Argentina. Con sus impresionantes lagos de aguas cristalinas y montañas nevadas que roban el aliento, este destino se ha convertido en el favorito para las giras de estudio.',
-      activities: [
-        'Rafting y kayaking en aguas turquesas',
-        'Parapente con vistas panorámicas',
-        'Senderismo por bosques patagónicos',
-        'Esquí y snowboard en temporada invernal',
-        'Visitas a fábricas de chocolate artesanal',
-        'Circuito Chico y miradores naturales'
-      ]
-    },
-    {
-      name: 'Pucón, Chile',
-      image: '/assets/images/content/foto-web-paisajes.jpg',
-      description: 'Ubicado en el corazón del sur de Chile, Pucón es sinónimo de aventura y naturaleza en estado puro. Con el imponente volcán Villarrica como telón de fondo, esta ciudad lacustre ofrece experiencias únicas que combinan adrenalina con la belleza natural del lugar.',
-      activities: [
-        'Rafting en ríos de aguas bravas',
-        'Kayak en lagos cristalinos',
-        'Trekking al volcán Villarrica',
-        'Escalada deportiva y rappel',
-        'Canopy entre bosques nativos',
-        'Termas naturales volcánicas'
-      ]
-    },
-    {
-      name: 'Foz de Iguazú y Camboriú, Brasil',
-      image: '/assets/images/content/services/foto_web_4.jpg',
-      description: 'Brasil ofrece una combinación perfecta entre las maravillas naturales de las Cataratas del Iguazú y las paradisíacas playas de Camboriú. Una experiencia que mezcla naturaleza espectacular con playas de arena blanca y una vibrante vida costera.',
-      activities: [
-        'Visita a las Cataratas del Iguazú',
-        'Parapente sobre el océano',
-        'Buceo y snorkeling',
-        'Surf en playas atlánticas',
-        'Ciclismo de montaña',
-        'Vida nocturna y gastronomía'
-      ]
-    }
+  readonly experiences=[
+    {number:'01',title:'Giras de estudio',text:'Viajes que combinan convivencia, descubrimiento y aventura. Propuestas para cursos y comunidades escolares que quieren cerrar una etapa con una experiencia compartida.',items:['Programas para grupos escolares','Destinos nacionales e internacionales','Actividades culturales y recreativas','Propuestas según fechas y número de pasajeros']},
+    {number:'02',title:'Viajes para personas mayores',text:'Experiencias para disfrutar sin apuro, descubrir nuevos paisajes y compartir buenos momentos. Diseñamos alternativas grupales considerando el ritmo y los intereses de los participantes.',items:['Escapadas y circuitos turísticos','Experiencias de naturaleza y cultura','Itinerarios adaptados al grupo','Opciones de alojamiento y alimentación según programa']},
+    {number:'03',title:'Viajes grupales y a medida',text:'Una celebración, una agrupación o simplemente las ganas de conocer otro lugar: transformamos la idea de un viaje en una propuesta organizada.',items:['Viajes de agrupaciones y organizaciones','Escapadas dentro de Chile','Alternativas en países vecinos','Planificación personalizada']}
+  ];
+  readonly destinations=[
+    {title:'Pucón y Araucanía',image:'/assets/images/content/foto-web-paisajes.jpg',description:'Volcanes, termas, lagos y paisajes del sur para quienes buscan naturaleza y experiencias compartidas.'},
+    {title:'Bariloche y Patagonia',image:'/assets/images/content/services/foto_web_1.jpg',description:'Lagos de montaña, bosques y la emoción de descubrir la Patagonia argentina.'},
+    {title:'Puerto Varas y Chiloé',image:'/assets/images/slider/web-galeria-3.jpg',description:'Tradiciones, arquitectura, gastronomía y paisajes que cuentan historias del sur de Chile.'},
+    {title:'Brasil',image:'/assets/images/content/services/foto_web_4.jpg',description:'Una combinación de costa, cultura y grandes atractivos naturales para explorar nuevos horizontes.'}
+  ];
+  readonly steps=[
+    {title:'Cuéntanos tu idea',text:'Comparte destino, fechas aproximadas, tipo de grupo y cantidad de pasajeros.'},
+    {title:'Diseñamos una propuesta',text:'Preparamos una alternativa de itinerario y servicios para conversar contigo.'},
+    {title:'Revisamos los detalles',text:'Ajustamos actividades, duración y condiciones según las necesidades del grupo.'},
+    {title:'Comienza la aventura',text:'Una vez acordado el programa, avanzamos con la organización del viaje.'}
   ];
 }
