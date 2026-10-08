@@ -13,12 +13,13 @@ import { RouterLink } from '@angular/router';
       <div class="hero-shade"></div>
       <div class="hero-copy">
         <p class="eyebrow">GIRAS INDÓMITO · CHILE</p>
-        <h1 id="hero-title">Dale una vuelta <em>a la aventura.</em></h1>
-        <p>Experiencias que conectan personas, destinos e historias inolvidables.</p>
+        <h1 id="hero-title">Tu gira de estudio, <em>una gran aventura.</em></h1>
+        <p>Viajes grupales para cursos que quieren explorar y vivir grandes experiencias.</p>
         <a routerLink="/services" class="action">Explora nuestros viajes <span aria-hidden="true">↗</span></a>
       </div>
       <span class="scroll-cue">DESLIZA PARA DESCUBRIR ↓</span>
     </section>
+    <section class="trust-strip"><strong>Giras de estudio y experiencias grupales</strong><span>Programas organizados</span><span>Destinos en Chile y Sudamérica</span><a routerLink="/contact">Cotiza tu curso ↗</a></section>
     <section class="story" #story>
       <div class="story-image" role="img" aria-label="Paisajes y aventura en el sur de Chile"></div>
       <div class="story-copy">
@@ -151,6 +152,7 @@ import { RouterLink } from '@angular/router';
     .closing h2 { max-width:900px; margin:0 auto 45px }
     @media(max-width:800px) { .story { grid-template-columns:1fr; padding:90px 24px }.story-image { height:48vh; min-height:280px }.journey-grid { grid-template-columns:1fr }.journey-card { min-height:420px }.immersive-hero { min-height:580px } }
 
+.trust-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:22px;padding:24px;background:#d7ff00;color:#172018}.trust-strip a{color:#172018;font-weight:900;text-decoration:underline}.trust-strip strong{font-weight:900}
     .editorial{padding:clamp(90px,12vw,180px) 7vw;background:#212a22}.editorial h2{max-width:1100px}.editorial h2 em,.panorama h2 em{color:#d7ff00;font-style:normal}.editorial-columns{margin-top:70px;display:grid;grid-template-columns:1fr 1fr;gap:10vw;max-width:1100px}.editorial-columns p{font-size:clamp(1.15rem,2vw,1.65rem);line-height:1.65;color:#dce4dc}
     .panorama{position:relative;min-height:105svh;display:flex;align-items:center;padding:10vw 8vw;isolation:isolate}.panorama-visual,.panorama-overlay{position:absolute;inset:0;z-index:-2}.panorama-visual{background:url('/assets/images/slider/web-galeria-5.jpg') center/cover;transform:scale(1.08)}.panorama-overlay{z-index:-1;background:linear-gradient(90deg,rgba(10,20,15,.84),rgba(10,20,15,.25))}.panorama-content{max-width:780px}.panorama h2{font-size:clamp(5rem,11vw,11rem)}.panorama-content>p:not(.eyebrow){max-width:500px;font-size:1.25rem;line-height:1.65;margin:30px 0}
     .values{padding:130px 7vw;background:#f3f4ec;color:#1c271f}.values .eyebrow,.route-section .eyebrow,.photo-story .eyebrow,.faq .eyebrow{color:#617600}.values-intro{max-width:950px}.values-intro>p:not(.eyebrow){font-size:1.3rem;line-height:1.7;margin-top:30px;max-width:700px;color:#526052}.values-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:75px}.value-card{padding:45px 30px;min-height:340px;border:1px solid #cdd4c8;display:flex;flex-direction:column;justify-content:space-between}.value-card span,.route span{font-size:.72rem;letter-spacing:.15em;font-weight:800;color:#647a00}.value-card h3{font-size:clamp(1.6rem,2vw,2.4rem);line-height:1.15;letter-spacing:-.035em}.value-card p,.route p{line-height:1.7;color:#526052}
