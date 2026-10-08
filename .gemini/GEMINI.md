@@ -1,0 +1,299 @@
+<!-- AUTO-GENERATED — DO NOT EDIT MANUALLY -->
+<!-- Managed-By: indomito-context-compiler -->
+<!-- Artifact-Format: 1 -->
+<!-- Engine-Version: 1.0.0 -->
+<!-- Source: ai/source/global-context/agent-charter.md, ai/source/global-context/output-style.md, ai/source/global-context/repo-routing.md, ai/source/global-context/spec-lifecycle.md, ai/source/repo-overrides/app-ngx-web.md -->
+# GEMINI.md — app-ngx-web
+
+# Agent Charter — Indómito Hub
+
+> Reglas esenciales de rol, idioma y seguridad para todos los agentes IA.
+
+## Contexto
+
+- **Producto**: Indómito Hub — plataforma de gestión de viajes con especialización en giras de estudios
+- **Arquitectura**: multi-repo con orquestador centralizado (`orchestrator`)
+- **Repos**: `app-ngx-hub` (Angular administrativo), `app-ngx-pay` (Angular público de pagos), `app-ngx-web` (Angular público informativo con SSR), `services` (Go microservicios), `authorizer` (Lambda Authorizer TypeScript), `infrastructure` (Infraestructura AWS)
+- **Región AWS de la plataforma Hub/Pay/API**: us-east-1 (Norte de Virginia). `app-ngx-web` conserva su hosting y configuración de despliegue propios hasta que exista una decisión explícita de migración.
+- **Perfiles AWS**: `pa-dev` (desarrollo), `pa-prd` (producción)
+- **Ambientes**: dev y prd (sin QA)
+
+## Comportamiento
+
+1. Fuente de verdad local: `AGENTS.md` en cada repo. Adaptadores por agente referencian, no duplican.
+2. No duplicar reglas documentadas en estándares o steering files.
+3. Jerarquía: `docs/standards/` > `ai/source/` > `<repo>/docs/ai/` > `<repo>/AGENTS.md`
+4. Archivos `AUTO-GENERATED`: no editar. Fuente en `ai/source/`, sync con `sync-context.sh`.
+
+## Idioma
+
+- Documentación: español correcto con tildes y acentos. Evitar ñ y ü cuando exista alternativa natural (ej: "diseno" → "diseño" se escribe con ñ porque no hay alternativa)
+- Identificadores (variables, funciones, clases, archivos): inglés
+- Rutas/URLs: español kebab-case sin tildes (`/viajes`, `/pasajeros`, `/cotizaciones`)
+- Textos UI: español correcto con tildes
+- TSDoc: español (frontend y backend Go)
+- Godoc: español
+- Commits: español sin tildes (limitación de git log y herramientas CLI)
+
+## Seguridad
+
+- Auth: JWT propio HMAC-SHA256, validado por el Lambda Authorizer del repo `authorizer` (stack `iam-auth-{stage}`) en el API Gateway compartido. Un solo punto de autorizacion: los microservicios no validan tokens por su cuenta
+- Azure EntraID: el codigo existe en el authorizer pero esta **deshabilitado** (`azureEnabled: false`). El proyecto no usa Azure como proveedor de identidad
+- Credenciales: AWS Secrets Manager / SSM Parameter Store, nunca hardcodeadas
+- **Variables de entorno**: unicamente via AWS SSM Parameter Store tipo **SecureString**. Prohibido usar variables de entorno planas (no encriptadas), archivos `.env` en producción, u otro servicio distinto de SSM SecureString para este fin.
+- IDs: ULIDs
+- Configuraciones dinámicas: en BD (DynamoDB), no hardcodeadas en frontend
+- Email: Nodemailer (no SES)
+
+## Infraestructura AWS — Reglas No Negociables
+
+- **Free Tier**: al diseñar o agregar cualquier recurso AWS, siempre priorizar las opciones dentro del Free Tier (tipos de instancia, tiers de servicio, límites de uso incluidos). Evaluar el costo antes de proponer un recurso nuevo.
+- **DynamoDB**: **estrictamente prohibido usar el operador `Scan`** bajo cualquier circunstancia, en cualquier ambiente. Usar siempre `Query` apoyado en la partition key/sort key o en un GSI/LSI diseñado para el patrón de acceso. Si no existe un índice que soporte la consulta necesaria, diseñar el índice antes de escribir la consulta — nunca recurrir a `Scan` como solución temporal.
+
+## Arquitectura Frontend — Features Angular
+
+- Todo cambio de UI/UX debe validarse en modo claro y oscuro, además de responder correctamente desde 320 px, teléfonos Android/iOS, tablets y escritorio. Los colores deben usar tokens semánticos o variantes `dark:`; no introducir superficies o textos legibles solo en uno de los temas.
+- Los fondos de marca amarillos deben usar siempre un token de primer plano oscuro y estable, como `--color-night`/`text-night`, tanto en modo claro como oscuro. No usar sobre ellos tokens adaptativos como `--color-ink`/`text-ink`, porque cambian a blanco en modo oscuro. Esta pareja fondo/texto debe definirse en el preset o sistema de tokens compartido y conservar contraste WCAG AA en estados normal, hover, active, focus y disabled.
+- Todo estado de contraste debe diseñarse y comprobarse como una pareja inseparable de fondo y primer plano en modo claro y oscuro. Esto incluye selección de texto, paneles y tarjetas, mensajes Toast, opciones de `p-select`, bloques de totales o destacados y overlays. No combinar un fondo estable con texto adaptativo si el texto puede converger al mismo tono del fondo.
+- La selección de texto sobre el amarillo de marca debe conservar primer plano oscuro estable. Los bordes de `p-panel` y tarjetas anidadas deben usar tokens semánticos suaves en modo oscuro, sin contornos claros de alto contraste que compitan con el contenido. Los Toast deben definir texto, resumen, detalle, icono y cierre legibles para cada severidad. Las opciones de `p-select` deben mantener contraste distinguible en reposo, hover, foco y selección. Los bloques oscuros de totales o destacados deben usar texto claro estable y niveles secundarios perceptibles.
+- Acciones adyacentes con la misma jerarquía visual deben usar el mismo componente o directiva PrimeNG y la misma combinación de `severity`, variante, tamaño, borde y radio. No mezclar un enlace construido manualmente con un `pButton` para representar botones equivalentes; cualquier diferencia visual debe responder a una jerarquía funcional intencional.
+- Toda feature nueva o modificada debe diseñarse mobile-first y comprobarse, como mínimo, a 320 px, 390 px, tablet y escritorio. Los layouts deben apilarse o reorganizarse sin scroll horizontal accidental; acciones, tablas, diálogos, formularios, overlays y textos deben seguir siendo visibles, operables y legibles con teclado y táctil en todos los tamaños.
+- Todo código de interfaz debe usar componentes PrimeNG y utilidades Tailwind CSS conforme a sus documentaciones oficiales. No incorporar otras librerías de componentes, CSS/SCSS personalizado ni implementaciones artesanales cuando PrimeNG provea el componente; reservar el HTML semántico nativo para estructura y casos sin equivalente en PrimeNG.
+- En formularios, usar siempre el componente o directiva PrimeNG correspondiente (`pInputText`, `p-select`, `p-datepicker`, `p-inputnumber`, `pButton`, `p-fileupload`, etc.). Tailwind se limita a layout, espaciado y composición externa; no debe reconstruir la apariencia interna de controles PrimeNG.
+- No aplicar en contenedores de componentes PrimeNG clases tipográficas heredables que alteren su contenido (`uppercase`, `font-*`, `text-*`, `tracking-*`, entre otras). El texto de la etiqueta debe estilizarse en un elemento hermano independiente cuando sea necesario.
+- No agregar selectores CSS globales sobre elementos de formulario ni sobrescribir tokens globales de componentes PrimeNG para resolver una pantalla puntual. Un cambio al preset o al orden de capas CSS es una modificación transversal del sistema de diseño y requiere validar visualmente y compilar todas las pantallas afectadas.
+- Cada feature nueva debe ser autocontenida dentro de `src/app/indomito-hub/<feature-name>` y usar nombres de carpetas, archivos e identificadores en inglés.
+- La estructura debe seguir el patrón modular de Axity: cada feature mantiene sus propios `constants`, `components`, `interfaces`, `pages`, `services`, `stores`, `types`, `fn` y archivo `<feature-name>.routes.ts` cuando correspondan.
+- Las páginas, componentes, servicios y stores deben contener solo la responsabilidad de su clase o función principal. Las interfaces, tipos, constantes, factories, validadores y helpers reutilizables deben declararse en las carpetas hermanas correspondientes de la misma feature, no dentro del archivo de una página o componente.
+- Los subdominios administrativos deben vivir bajo `src/app/indomito-hub/administration/`; por ejemplo, `administration/iam` y `administration/configuration`.
+- Solo las capacidades transversales y reutilizadas por varias features deben vivir en `core` o `shared`. No trasladar lógica específica de una feature a esas carpetas.
+- El módulo `indomito-hub/programs` es la referencia local de organización. Para decisiones no cubiertas por este proyecto, usar como referencia el módulo `surgeries` del frontend Axity.
+
+## Patrones de Referencia
+
+| Repo           | Módulo referencia        | Paradigma             |
+| -------------- | ------------------------ | --------------------- |
+| app-ngx-hub    | `src/app/indomito-hub/programs` | Feature administrativa autocontenida con rutas, stores, servicios y tipos |
+| app-ngx-pay    | `src/app/payment-portal` | Portal público mínimo, sin sesión ni features administrativas |
+| app-ngx-web    | `src/app/features` | Sitio público informativo con SSR, contenido comercial y SEO |
+| services       | `services/api-catalog`, `services/api-program` | Endpoint-per-function |
+| authorizer     | `src/functions/authorize.ts` | Handler unico + politicas IAM |
+
+> Los servicios reales de catalogos, cotizaciones y generacion de presupuesto
+> viven en `ind-hub-api-gox-sls-pri-gh/services/`. La guia para crear un servicio
+> nuevo esta en el `README.md` de ese repo.
+
+# Output Style — Indómito Hub
+
+> Formato de commits, respuestas y PRs para todos los agentes IA.
+
+## Commits
+
+```text
+tipo(scope): descripcion breve en espanol sin tildes
+```
+
+- Max 50 chars (hard limit: 72). Línea en blanco antes del cuerpo.
+- Commits en español **sin tildes** (limitación de git log y herramientas CLI). Viñetas con —
+- Sin gestión de tickets externa. No se requiere Issue-ID.
+
+### Tipos
+
+`feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+
+### Scopes
+
+| Repo           | Scopes                                                                                   |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| infrastructure | `ddb`, `s3`, `ssm`, `cdn`, `waf`, `iot`, `api-gateway`, `config`, `deps`                |
+| app-ngx-hub    | `core`, `app-auth`, `accounting`, `analytics`, `assign-installment`, `shared`, `client`, `configuration`, `documents`, `help`, `home`, `inbox`, `informative-media`, `layout`, `meet`, `passenger`, `payment`, `payment-history`, `profile`, `program`, `ticket`, `tools` |
+| app-ngx-pay    | `core`, `shared`, `payment`, `receipt`, `configuration`, `tools` |
+| app-ngx-web    | `core`, `shared`, `home`, `programs`, `services`, `about`, `contact`, `gallery`, `layout`, `seo`, `tools` |
+| services       | `auth`, `accounting`, `balance`, `configuration`, `contract`, `entity`, `extraction`, `favorites`, `maintainer`, `meet`, `notification`, `payment`, `program`, `ticket`, `tools`, `whatsapp-agent`, `trigger`, `config`, `deps` |
+| authorizer     | `authorizer`, `auth`, `iot`, `config`, `deps`                                            |
+| orchestrator   | `docs`, `tools`, `steering`, `workspace`, `config`                                       |
+
+> **Scopes de auth**: `auth` en `services` es el servicio de login y emision de
+> tokens (pendiente de crear); `authorizer` en el repo `authorizer` es el Lambda
+> Authorizer que valida esos tokens en el API Gateway compartido (ya existe).
+> Son repos distintos — usar el scope del repo que se modifica.
+>
+> La mayoría de scopes de `services` y `app-ngx-hub` son de módulos aún no
+> implementados. Ver la tabla de correspondencia módulo ↔ servicio ↔ scope en
+> `docs/standards/product/module-definitions.md` para saber cuáles existen hoy.
+
+### Ejemplo
+
+```text
+feat(viajes): agregar listado de viajes activos
+
+— Agrega vista con filtro por estado en la pagina de viajes
+```
+
+## Respuestas
+
+- Español correcto con tildes y acentos. Directo y conciso.
+- Código completo y funcional. Comentarios solo si aportan valor.
+- Archivos de código: inglés. Documentación: español correcto. API paths: español plural kebab-case sin tildes.
+
+## Pull Requests
+
+Título: `tipo(scope): descripcion breve sin tildes` (max 70 chars). Descripción (body): español correcto con tildes. Resumen, qué se probó, pendientes.
+
+# Repo Routing — Indómito Hub
+
+> Mapa de repositorios y reglas de routing para cambios cross-repo.
+
+## Repos
+
+| Alias          | Stack                               | Responsabilidad                                           |
+| ----------------| -------------------------------------| -----------------------------------------------------------|
+| infrastructure | TypeScript, Serverless Framework v4 | Infraestructura AWS (DynamoDB, S3, SSM, CDN, API Gateway) |
+| app-ngx-hub    | Angular 22, Signals, TailwindCSS    | SPA administrativa: viajes, contratos, cobranza y tesorería |
+| app-ngx-pay    | Angular 22, Signals, TailwindCSS    | SPA pública: consulta de cuotas, checkout y comprobantes   |
+| app-ngx-web    | Angular 21, SSR, PrimeNG, TailwindCSS | Web pública: marca, programas, servicios, contacto y SEO |
+| services       | Go 1.25, Echo v4, DynamoDB          | Backend: viajes, cotizaciones, contratos, destinos        |
+| authorizer     | TypeScript, Serverless Framework v4 | Lambda Authorizer compartido (JWT propio HMAC-SHA256)     |
+| orchestrator   | —                                   | Documentación centralizada, steering, estándares          |
+
+## Repos Legacy
+
+Generación anterior del producto, **hoy en producción**, que Indómito Hub
+reemplaza progresivamente. Están en el workspace como referencia funcional y para
+mantención correctiva. Region us-west-2, no us-east-1.
+
+| Alias              | Directorio                     | Stack                                          | Reemplazado por            |
+| ------------------ | ------------------------------ | ---------------------------------------------- | -------------------------- |
+| legacy-application | `portal_admin_ng_dev_pri_usw2` | Angular 21, PrimeNG 21, @ngrx/signals          | app-ngx-hub                |
+| legacy-services    | `portal-admin-sls-dev-pri-usw2`| Serverless v4: Node.js 22, Go 1.24, Python     | services + authorizer      |
+
+Reglas rápidas:
+
+- Features nuevas **nunca** van a un repo legacy: van a `ind-hub-*`
+- Solo se tocan para corregir errores en produccion o cambios normativos urgentes
+- No copiar codigo legacy tal cual: reimplementar segun `docs/standards/`
+- No participan del sync de contexto IA (no estan en `ai/sync-config.json`)
+- Los estandares nuevos no se aplican retroactivamente al legacy
+- Verificar `--region us-west-2` y el perfil AWS antes de cualquier comando legacy
+
+Detalle completo en `docs/standards/architecture/legacy-systems.md`.
+
+## Dominios
+
+| Ambiente | Frontend administrativo           | Frontend de pagos             | Sitio público | API                                                   |
+| -------- | --------------------------------- | ----------------------------- | ------------- | ----------------------------------------------------- |
+| dev      | nuevo.admin.dev.girasindomito.cl  | pagos.dev.girasindomito.cl    | configuración propia de `app-ngx-web` | API Gateway default (asignado automáticamente por AWS)|
+| prd      | nuevo.admin.girasindomito.cl      | pendiente                     | girasindomito.cl | API Gateway default (asignado automáticamente por AWS)|
+
+## Routing
+
+| Tipo de cambio                             | Repo destino   |
+| ------------------------------------------ | -------------- |
+| Infraestructura AWS compartida             | infrastructure |
+| UI administrativa, componentes, stores     | app-ngx-hub    |
+| Portal público de pagos                    | app-ngx-pay    |
+| Sitio público, contenido comercial y SEO   | app-ngx-web    |
+| Endpoints, lógica de negocio, API          | services       |
+| Validación de tokens, políticas de acceso  | authorizer     |
+| Estándares, steering, documentación        | orchestrator   |
+| Bug en produccion del portal actual (UI)   | legacy-application |
+| Bug en produccion de la API actual         | legacy-services |
+
+## Cambios Cross-Repo
+
+1. **Contratos de API**: documentar en orquestador → implementar backend → consumir frontend
+2. **Nuevos módulos**: backend (handler+service+domain) + frontend (store, ruta, componentes)
+3. **Auth administrativo**: coordinar authorizer (validación de tokens) ↔ services (emisión de tokens) ↔ app-ngx-hub (interceptores, guards). `app-ngx-pay` y `app-ngx-web` solo consumen contratos públicos explícitos del backend.
+4. **Commits**: siempre separados por repo. Nunca mezclar frontend y backend en un commit.
+
+## Orden de Despliegue del API
+
+El Gateway compartido depende del authorizer, lo que invierte el orden habitual:
+
+1. `authorizer` — exporta el output `iamAuthArn`
+2. `infrastructure` — módulo `api-gateway`, que importa ese ARN y crea el authorizer del Gateway
+3. `services` — microservicios Go, que registran sus rutas en el Gateway compartido
+
+# Spec Lifecycle — Indómito Hub
+
+> Ciclo de vida de especificaciones. Consultar solo cuando se trabaje con specs.
+
+## Tipos
+
+- **Kiro specs** (por repo): `<repo>/.kiro/specs/<feature>/` con `requirements.md`, `design.md`, `tasks.md`
+- **Cross-repo specs**: `specs/features/`, `specs/bugs/`, `specs/decisions/` en el orquestador (solo documentación, no reconocidos por Kiro IDE)
+
+## Ubicación de Specs Cross-Repo
+
+Kiro solo reconoce specs dentro de `<repo>/.kiro/specs/<feature>/`. Las specs en `orchestrator/specs/` son documentación pero no ofrecen la experiencia interactiva del IDE (navegar requirements, design, tasks).
+
+Para features cross-repo que necesitan la experiencia completa de Kiro:
+
+1. **Crear el spec en el repo principal** — el repo donde está el grueso del trabajo. Usar `<repo>/.kiro/specs/<feature>/`
+2. **Documentar los repos involucrados** — agregar una sección "Repos Involucrados" en el `requirements.md` con una tabla que indique qué hace cada repo
+3. **NO duplicar el spec** — el spec vive en un solo lugar. Los otros repos implementan las tareas que les corresponden según el design y tasks del spec principal
+
+### Cómo elegir el repo principal
+
+| Criterio                          | Repo                                  |
+| --------------------------------- | ------------------------------------- |
+| Backend con nuevo módulo/endpoint | `services`                            |
+| Feature administrativa de UI      | `app-ngx-hub`                         |
+| Feature pública de pagos          | `app-ngx-pay`                         |
+| Feature del sitio público o SEO   | `app-ngx-web`                         |
+| Infraestructura AWS compartida    | `infrastructure`                      |
+| Si no hay repo dominante          | `services` (mayor superficie)         |
+
+### Cuándo usar `orchestrator/specs/`
+
+Solo para documentación que NO necesita la experiencia interactiva de Kiro:
+- ADRs (Architecture Decision Records) en `specs/decisions/`
+- Specs históricas ya completadas que se archivan
+- Documentación de bugs cross-repo que ya fueron resueltos
+
+## Ciclo de Vida
+
+1. **Crear**: en `.kiro/specs/` del repo principal (ver reglas de ubicación arriba)
+2. **Implementar**: seguir tasks.md, commits separados por repo (sin issue-id — ver `output-style.md`)
+3. **Completar**: tasks marcadas, tests pasando, código mergeado en todos los repos involucrados
+4. **Archivar** (opcional): mover a `orchestrator/specs/features/` como referencia histórica. No eliminar del repo original hasta que todos los PRs estén mergeados
+
+## Reglas
+
+- No mezclar specs de features distintas en el mismo directorio
+- No duplicar contenido de specs en steering files
+- Specs NO son procesadas por el sync engine
+- `.kiro/specs/` es exclusivo de Kiro, no se mezcla con `specs/` del orquestador
+- Un spec cross-repo vive en UN solo repo (el principal). No se duplica en múltiples repos
+- Siempre incluir sección "Repos Involucrados" en specs que afectan más de un repo
+
+---
+
+# Repo Override — app-ngx-web
+
+> Contexto específico del sitio web público de Giras Indómito.
+
+## Descripción
+
+Aplicación Angular 21 pública con SSR para presentar la marca, programas, destinos, servicios y canales de contacto. Está orientada a contenido, experiencia comercial y SEO. Enlaza al portal `app-ngx-pay`, pero no implementa pagos ni capacidades administrativas.
+
+## Stack
+
+- Angular 21 con componentes standalone, SSR e `inject()`
+- PrimeNG v21 y TailwindCSS v3
+- TypeScript 5.9, Karma y Jasmine
+- GSAP, AOS, Swiper y Three.js para experiencias visuales
+
+## Reglas
+
+- Mantener separados el sitio informativo (`app-ngx-web`), el portal de pagos (`app-ngx-pay`) y el Hub administrativo (`app-ngx-hub`).
+- Priorizar SEO, accesibilidad, rendimiento, diseño responsive y compatibilidad SSR; no usar directamente APIs exclusivas del navegador sin proteger su ejecución.
+- No incorporar sesión administrativa, IAM, checkout ni gestión de cuotas.
+- Usar PrimeNG para controles y Tailwind para composición conforme a la versión instalada en este repositorio.
+- Mantener componentes standalone y responsabilidades autocontenidas en `core`, `features`, `layout` y `shared`.
+- TSDoc en español para funciones públicas e interfaces.
+- Validar anchos de 320 px, 390 px, tablet y escritorio.
+
+## Scopes de commits
+
+`core`, `shared`, `home`, `programs`, `services`, `about`, `contact`, `gallery`, `layout`, `seo`, `tools`

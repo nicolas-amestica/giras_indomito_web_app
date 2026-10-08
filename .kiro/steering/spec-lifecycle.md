@@ -1,0 +1,62 @@
+<!-- AUTO-GENERATED — DO NOT EDIT MANUALLY -->
+<!-- Managed-By: indomito-context-compiler -->
+<!-- Artifact-Format: 1 -->
+<!-- Engine-Version: 1.0.0 -->
+<!-- Source: ai/source/global-context/spec-lifecycle.md -->
+---
+inclusion: manual
+description: Ciclo de vida de especificaciones
+---
+
+# Spec Lifecycle — Indómito Hub
+
+> Ciclo de vida de especificaciones. Consultar solo cuando se trabaje con specs.
+
+## Tipos
+
+- **Kiro specs** (por repo): `<repo>/.kiro/specs/<feature>/` con `requirements.md`, `design.md`, `tasks.md`
+- **Cross-repo specs**: `specs/features/`, `specs/bugs/`, `specs/decisions/` en el orquestador (solo documentación, no reconocidos por Kiro IDE)
+
+## Ubicación de Specs Cross-Repo
+
+Kiro solo reconoce specs dentro de `<repo>/.kiro/specs/<feature>/`. Las specs en `orchestrator/specs/` son documentación pero no ofrecen la experiencia interactiva del IDE (navegar requirements, design, tasks).
+
+Para features cross-repo que necesitan la experiencia completa de Kiro:
+
+1. **Crear el spec en el repo principal** — el repo donde está el grueso del trabajo. Usar `<repo>/.kiro/specs/<feature>/`
+2. **Documentar los repos involucrados** — agregar una sección "Repos Involucrados" en el `requirements.md` con una tabla que indique qué hace cada repo
+3. **NO duplicar el spec** — el spec vive en un solo lugar. Los otros repos implementan las tareas que les corresponden según el design y tasks del spec principal
+
+### Cómo elegir el repo principal
+
+| Criterio                          | Repo                                  |
+| --------------------------------- | ------------------------------------- |
+| Backend con nuevo módulo/endpoint | `services`                            |
+| Feature administrativa de UI      | `app-ngx-hub`                         |
+| Feature pública de pagos          | `app-ngx-pay`                         |
+| Feature del sitio público o SEO   | `app-ngx-web`                         |
+| Infraestructura AWS compartida    | `infrastructure`                      |
+| Si no hay repo dominante          | `services` (mayor superficie)         |
+
+### Cuándo usar `orchestrator/specs/`
+
+Solo para documentación que NO necesita la experiencia interactiva de Kiro:
+- ADRs (Architecture Decision Records) en `specs/decisions/`
+- Specs históricas ya completadas que se archivan
+- Documentación de bugs cross-repo que ya fueron resueltos
+
+## Ciclo de Vida
+
+1. **Crear**: en `.kiro/specs/` del repo principal (ver reglas de ubicación arriba)
+2. **Implementar**: seguir tasks.md, commits separados por repo (sin issue-id — ver `output-style.md`)
+3. **Completar**: tasks marcadas, tests pasando, código mergeado en todos los repos involucrados
+4. **Archivar** (opcional): mover a `orchestrator/specs/features/` como referencia histórica. No eliminar del repo original hasta que todos los PRs estén mergeados
+
+## Reglas
+
+- No mezclar specs de features distintas en el mismo directorio
+- No duplicar contenido de specs en steering files
+- Specs NO son procesadas por el sync engine
+- `.kiro/specs/` es exclusivo de Kiro, no se mezcla con `specs/` del orquestador
+- Un spec cross-repo vive en UN solo repo (el principal). No se duplica en múltiples repos
+- Siempre incluir sección "Repos Involucrados" en specs que afectan más de un repo

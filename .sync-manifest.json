@@ -1,0 +1,196 @@
+{
+  "engineVersion": "1.0.0",
+  "files": [
+    {
+      "sourcePaths": [
+        "ai/source/global-context/agent-charter.md",
+        "ai/source/global-context/output-style.md",
+        "ai/source/global-context/repo-routing.md",
+        "ai/source/global-context/spec-lifecycle.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.claude/rules/global-rules.md",
+      "targetPath": ".claude/rules/global-rules.md",
+      "checksum": "sha256:dd2d62ace6657b7d5c02638d91a4f81d585a89bfc96b76c836f09f4228a3413a"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/repo-overrides/app-ngx-web.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.claude/rules/repo-rules.md",
+      "targetPath": ".claude/rules/repo-rules.md",
+      "checksum": "sha256:83b31207c3a140e29be164f5583c0f4626b31a54d5143c8289592bd69eccca50"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/repo-overrides/app-ngx-web.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.kiro/steering/domain-context.md",
+      "targetPath": ".kiro/steering/domain-context.md",
+      "checksum": "sha256:fac2adb5f58b8907497c31b8e0b4a12bbf059fa99f2cf7ed76439c2a98bef953"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/global-context/repo-routing.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.kiro/steering/repo-routing.md",
+      "targetPath": ".kiro/steering/repo-routing.md",
+      "checksum": "sha256:c3c6b9fb236b875f2912dd08f7b7a472567a150ab5cddf80bfd64fdc52ad3879"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/global-context/spec-lifecycle.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.kiro/steering/spec-lifecycle.md",
+      "targetPath": ".kiro/steering/spec-lifecycle.md",
+      "checksum": "sha256:5342ad81f316d6884e6206d6e74a5ec57b9f7e45eca65f829a355f24e482cb0d"
+    },
+    {
+      "sourcePaths": [
+        "docs/standards/architecture/auth-flow.md",
+        "docs/standards/architecture/contracts-policy.md",
+        "docs/standards/architecture/environment-definitions.md",
+        "docs/standards/architecture/legacy-systems.md",
+        "docs/standards/architecture/repo-map.md",
+        "docs/standards/architecture/system-overview.md",
+        "docs/standards/backend/common-backend-rules.md",
+        "docs/standards/backend/go-conventions.md",
+        "docs/standards/backend/typescript-conventions.md",
+        "docs/standards/domains/auth-domain-rules.md",
+        "docs/standards/domains/orders-domain-rules.md",
+        "docs/standards/frontend/angular-architecture.md",
+        "docs/standards/frontend/design-system-usage.md",
+        "docs/standards/frontend/ui-patterns.md",
+        "docs/standards/global/api-design.md",
+        "docs/standards/global/architecture-principles.md",
+        "docs/standards/global/aws-naming.md",
+        "docs/standards/global/commit-conventions.md",
+        "docs/standards/global/error-handling.md",
+        "docs/standards/global/git-pr-guidelines.md",
+        "docs/standards/global/naming-conventions.md",
+        "docs/standards/global/observability.md",
+        "docs/standards/global/security-baseline.md",
+        "docs/standards/global/testing-baseline.md",
+        "docs/standards/product/domain-glossary.md",
+        "docs/standards/product/module-definitions.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/.kiro/steering/standards-ref.md",
+      "targetPath": ".kiro/steering/standards-ref.md",
+      "checksum": "sha256:286e97c325d58da2ff3d59a1250479b8e5ab65d6f245742a2a6194dd48b00f8c"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/global-context/agent-charter.md",
+        "ai/source/global-context/output-style.md",
+        "ai/source/global-context/repo-routing.md",
+        "ai/source/global-context/spec-lifecycle.md",
+        "ai/source/repo-overrides/app-ngx-web.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/AGENTS.md",
+      "targetPath": "AGENTS.md",
+      "checksum": "sha256:133d36ec3b59ce5f5de3393c0d09d57958ef8ec9381c7ac3d732f8d3f5fe290a"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/global-context/agent-charter.md",
+        "ai/source/global-context/output-style.md",
+        "ai/source/global-context/repo-routing.md",
+        "ai/source/global-context/spec-lifecycle.md",
+        "ai/source/repo-overrides/app-ngx-web.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/CLAUDE.md",
+      "targetPath": ".claude/CLAUDE.md",
+      "checksum": "sha256:55cbc99c936a3ca4126454c004d615e2295f375190784d19c11b07b8b0cf270a"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/global-context/agent-charter.md",
+        "ai/source/global-context/output-style.md",
+        "ai/source/global-context/repo-routing.md",
+        "ai/source/global-context/spec-lifecycle.md",
+        "ai/source/repo-overrides/app-ngx-web.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/GEMINI.md",
+      "targetPath": ".gemini/GEMINI.md",
+      "checksum": "sha256:fabd3331eeadb10bcee128b3f80e329ad8d7a048e5aceb30e4fe0d96eccd06db"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/mcp/shared.json",
+        "ai/source/mcp/frontend.json"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/mcp/codex-mcp.toml",
+      "targetPath": "mcp/codex-mcp.toml",
+      "checksum": "sha256:dd000aa64ba63f9b583a31aefa514fedd5006dddbc969eba738313c5a6f21b95"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/mcp/shared.json",
+        "ai/source/mcp/frontend.json"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/mcp/gemini-mcp.json",
+      "targetPath": "mcp/gemini-mcp.json",
+      "checksum": "sha256:52969a32efea09a8e37d6c66dec99df156ddb59743f8a92e45f4a0edcd9384c9"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/mcp/shared.json",
+        "ai/source/mcp/frontend.json"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/mcp/mcp.json",
+      "targetPath": "mcp/mcp.json",
+      "checksum": "sha256:52969a32efea09a8e37d6c66dec99df156ddb59743f8a92e45f4a0edcd9384c9"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/angular-best-practices.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/claude/angular-best-practices.md",
+      "targetPath": ".claude/skills/angular-best-practices.md",
+      "checksum": "sha256:82f6b526bd2c91660b73e5661842841114b092679f9d7733e3572e34745b6008"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/api-contract-review.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/claude/api-contract-review.md",
+      "targetPath": ".claude/skills/api-contract-review.md",
+      "checksum": "sha256:60713e8f63d530882cb81b37db94f6f488b4e82c0f68326b596c37a7e64b3945"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/aws-naming-review.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/claude/aws-naming-review.md",
+      "targetPath": ".claude/skills/aws-naming-review.md",
+      "checksum": "sha256:71986852fc56bf70ef830b240328846a046c8d212d7df962bfcc51f6a5734e23"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/angular-best-practices.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/kiro/angular-best-practices.md",
+      "targetPath": ".kiro/skills/angular-best-practices.md",
+      "checksum": "sha256:82f6b526bd2c91660b73e5661842841114b092679f9d7733e3572e34745b6008"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/api-contract-review.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/kiro/api-contract-review.md",
+      "targetPath": ".kiro/skills/api-contract-review.md",
+      "checksum": "sha256:60713e8f63d530882cb81b37db94f6f488b4e82c0f68326b596c37a7e64b3945"
+    },
+    {
+      "sourcePaths": [
+        "ai/source/skills/aws-naming-review.md"
+      ],
+      "outputPath": "ai/generated/app-ngx-web/skills/kiro/aws-naming-review.md",
+      "targetPath": ".kiro/skills/aws-naming-review.md",
+      "checksum": "sha256:71986852fc56bf70ef830b240328846a046c8d212d7df962bfcc51f6a5734e23"
+    }
+  ],
+  "managedBy": "indomito-context-compiler",
+  "artifactFormatVersion": 1,
+  "sourceCommit": "5df35578d03a7d14e7cb857b8f3819edcdd11f7d",
+  "sourceDirty": true
+}

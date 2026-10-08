@@ -1,0 +1,29 @@
+<!-- AUTO-GENERATED — DO NOT EDIT MANUALLY -->
+<!-- Managed-By: indomito-context-compiler -->
+<!-- Artifact-Format: 1 -->
+<!-- Engine-Version: 1.0.0 -->
+<!-- Source: ai/source/repo-overrides/app-ngx-web.md -->
+---
+inclusion: manual
+description: Estandares de dominio y scope del repo
+globs:
+  - "src/app/**/*.ts"
+  - "src/app/**/*.html"
+---
+
+# Domain Context — app-ngx-web
+
+Contexto de dominio especifico para giras_indomito_ng_dev_pub_usw2 (scope: frontend).
+
+Este archivo se carga automaticamente cuando se editan archivos que coinciden con los globs definidos.
+
+## Scope Standards
+
+- `docs/standards/frontend/angular-architecture.md`
+- `docs/standards/frontend/design-system-usage.md`
+- `docs/standards/frontend/ui-patterns.md`
+
+## Domain Standards
+
+- `docs/standards/domains/auth-domain-rules.md`
+- `docs/standards/domains/orders-domain-rules.md`

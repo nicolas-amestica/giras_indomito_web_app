@@ -1,0 +1,9 @@
+# AUTO-GENERATED — DO NOT EDIT MANUALLY
+# Managed-By: indomito-context-compiler
+# Artifact-Format: 1
+# Engine-Version: 1.0.0
+# Source: ai/source/mcp/frontend.json, ai/source/mcp/shared.json
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@4.0.4"]

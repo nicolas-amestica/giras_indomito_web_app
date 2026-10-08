@@ -1,0 +1,160 @@
+<!-- AUTO-GENERATED — DO NOT EDIT MANUALLY -->
+<!-- Managed-By: indomito-context-compiler -->
+<!-- Artifact-Format: 1 -->
+<!-- Engine-Version: 1.0.0 -->
+<!-- Source: ai/source/skills/angular-best-practices.md -->
+# Angular Best Practices — Indómito Hub
+
+Skill de revisión de código Angular para los repositorios `app-ngx-hub`, `app-ngx-pay` y `app-ngx-web`.
+Basado en las convenciones del equipo de Indómito Hub.
+
+## Componentes
+
+### Reglas obligatorias
+
+- Todos los componentes DEBEN ser standalone con `ChangeDetectionStrategy.OnPush`
+- Usar control flow moderno: `@if`, `@for`, `@switch`
+- PROHIBIDO `*ngIf`, `*ngFor`, `*ngSwitch` en codigo nuevo
+- `@for` requiere `track` obligatorio
+- Separar en container (pages/) y dummies (components/)
+- Componentes dummies NO importan servicios ni stores
+- Consumir senales/selectores del store; emitir eventos al store o al contenedor
+
+### Estructura de un componente
+
+```typescript
+@Component({
+  selector: 'app-mi-componente',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, PrimeNGModules],
+  templateUrl: './mi-componente.component.html',
+})
+export class MiComponenteComponent {
+  // inject() en lugar de constructor injection
+  private readonly store = inject(MiStore);
+
+  // Senales del store
+  readonly items = this.store.items;
+  readonly isLoading = this.store.isLoading;
+}
+```
+
+## SignalStore (@ngrx/signals)
+
+### Orden de composicion
+
+```typescript
+export const MiStore = signalStore(
+  withState(initialState),
+  withComputed(({ items }) => ({
+    totalItems: computed(() => items().length),
+  })),
+  withMethods((store, service = inject(MiService)) => ({
+    loadItems: rxMethod<void>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap(() =>
+          service.getItems().pipe(
+            tap((items) => patchState(store, { items, isLoading: false })),
+            catchError((error) => {
+              patchState(store, { error: error.message, isLoading: false });
+              return EMPTY;
+            }),
+            finalize(() => patchState(store, { isLoading: false })),
+          ),
+        ),
+      ),
+    ),
+  })),
+  withHooks({ onInit: (store) => store.loadItems() }),
+);
+```
+
+### Reglas del store
+
+- Estado minimo: `isLoading`, `error`, `status: StoreStatusTx`
+- Efectos con `rxMethod` + `tap -> switchMap -> tap -> catchError -> finalize`
+- Funciones complejas extraidas a archivos `fn-*.ts`
+- Stores globales: `PatientStore`, `ProfessionalStore`, `AuthStore`, `OrderManagementStore`
+
+## PrimeNG y Estilos
+
+- Usar el componente o la directiva PrimeNG disponible para cada control interactivo; por ejemplo, `pInputText`, `p-select`, `p-datepicker`, `p-inputnumber`, `pButton` y `p-fileupload`.
+- Usar HTML semántico nativo únicamente para estructura o cuando PrimeNG no tenga un equivalente aplicable.
+- Usar TailwindCSS para layout, espaciado, responsividad y composición externa. No recrear con utilidades la apariencia interna de un componente PrimeNG.
+- En acciones con fondo amarillo de marca, usar el token estable de primer plano oscuro (`--color-night`/`text-night`) en ambos temas; nunca `--color-ink`/`text-ink`, porque es adaptativo y pasa a blanco en modo oscuro. Configurar la pareja en el preset/tokens compartidos y validar contraste en todos los estados del botón.
+- Tratar fondo y primer plano como una pareja de contraste en ambos temas. Revisar explícitamente selección de texto, bordes de `p-panel` y tarjetas, Toast por severidad, opciones de `p-select` en reposo/hover/foco/selección, overlays y bloques de totales o destacados. En superficies oscuras usar texto claro estable y tonos secundarios perceptibles; en selección amarilla usar texto oscuro estable.
+- Para acciones adyacentes con igual jerarquía, usar el mismo componente o directiva PrimeNG con igual `severity`, variante, tamaño, borde y radio. No construir uno como enlace estilizado manualmente y otro como `pButton` si deben verse equivalentes.
+- Implementar layouts mobile-first y validar cada feature a 320 px, 390 px, tablet y escritorio, incluyendo formularios, tablas, diálogos, overlays y grupos de acciones. No aceptar scroll horizontal accidental, controles fuera del viewport ni áreas táctiles inaccesibles.
+- PROHIBIDO CSS/SCSS propio o `<style>` en componentes.
+- PROHIBIDO agregar selectores globales para `input`, `select`, `textarea`, `button` o elementos internos `.p-*` con el fin de corregir una pantalla.
+- No colocar clases tipográficas heredables como `uppercase`, `font-*`, `text-*` o `tracking-*` en un `label` o contenedor que envuelva un componente PrimeNG. Separar el texto de la etiqueta en un elemento hermano.
+- Los cambios en `providePrimeNG`, el preset de `@primeng/themes`, `cssLayer` o tokens de componentes son cambios globales del sistema de diseño: deben justificarse, probarse con las pantallas existentes y acompañarse de `ng build`.
+- Mantener el orden oficial de capas CSS compatible con Tailwind y PrimeNG definido por el proyecto. No modificarlo desde una feature.
+- Temas: `@primeng/themes` + `tailwindcss-primeui`.
+
+## Servicios HTTP
+
+- Solo IO: `HttpClient`, `HttpParams`, `map(({ data }) => data)`
+- Sin reglas de negocio ni side effects de UI
+- Exponen `Observable<T>` mapeando `ResponsePortalService<T>` a `T`
+
+## Formularios
+
+- Formularios Reactivos tipados obligatorios. Prohibido `ngModel`
+- `NonNullableFormBuilder`, `Validators`, `AsyncValidators`
+- Submit deshabilitado si `form.invalid || store.isLoading()`
+- Patron: `(ngSubmit)` -> validar -> `store.submitX(form.getRawValue())`
+
+## Estructura de Carpetas
+
+```text
+<feature>/
+  pages/          — Paginas enrutables (*.page.ts)
+  components/     — Componentes presentacionales (*.component.ts)
+  stores/         — Stores locales (*.store.ts)
+  services/       — Servicios HTTP (*.service.ts)
+  fn/             — Helpers puros (fn-*.ts)
+  interfaces/     — Tipos y contratos (*.interface.ts)
+  enums/          — Enumeraciones (*.enum.ts)
+  constants/      — Constantes (*.ts)
+```
+
+## Anti-patrones Prohibidos
+
+| Anti-patron                                    | Alternativa correcta                          |
+| ---------------------------------------------- | --------------------------------------------- |
+| Logica de negocio en componentes/servicios     | Mover a store o helpers `fn-*.ts`             |
+| Funciones en plantillas                        | Usar pipes o computed signals                 |
+| `*ngIf/*ngFor/*ngSwitch` en codigo nuevo       | `@if`, `@for`, `@switch`                      |
+| Efectos sin `finalize` o sin `catchError`      | Siempre incluir ambos                         |
+| Funciones > 75 lineas                          | Extraer helpers                               |
+| CSS/SCSS personalizados                        | TailwindCSS para layout + PrimeNG para controles |
+| Control HTML artesanal con equivalente PrimeNG | Componente o directiva PrimeNG correspondiente   |
+| Tipografía heredable en wrapper PrimeNG        | Etiqueta separada sin herencia sobre el control  |
+| Override global para corregir una sola página  | Props PrimeNG y utilidades locales de layout      |
+| `subscribe()` sin `takeUntilDestroyed()`       | Agregar `takeUntilDestroyed()` en constructor |
+| Acceso directo a `sessionStorage/localStorage` | Usar `BrowserStorageService`                  |
+| `any` en superficies publicas                  | Definir interfaces tipadas                    |
+
+## Patron de Referencia
+
+Modulo de referencia: `src/app/app-services-portal/agenda/`
+
+- Store: `agenda/stores/agenda.store.ts`
+- Efecto: `agenda/stores/fn-fetch-agenda-requests.ts`
+- Servicio: `agenda/services/agenda.service.ts`
+
+## Checklist de Revision
+
+1. Componente es standalone con OnPush
+2. No usa directivas legacy (`*ngIf`, `*ngFor`)
+3. Store sigue orden: `withState -> withComputed -> withMethods -> withHooks`
+4. Efectos tienen `catchError` y `finalize`
+5. Servicios solo hacen IO (sin logica de negocio)
+6. No hay CSS/SCSS custom
+7. Formularios son reactivos tipados
+8. No hay `any` en interfaces publicas
+9. Funciones <= 75 lineas
+10. Codigo en ingles, textos visibles en espanol
