@@ -1,98 +1,16 @@
-<!-- Hero Section -->
-<section class="relative h-96 flex items-center justify-center overflow-hidden">
-  <div class="absolute inset-0">
-    <img
-      src="/assets/images/backgrounds/contact-hero.jpg"
-      alt="Contacto"
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-black/60"></div>
-  </div>
-  <div class="relative z-10 text-center text-white px-4">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Contáctanos</h1>
-    <p class="text-xl sm:text-2xl text-gray-200">Estamos aquí para ayudarte</p>
-  </div>
-</section>
-
-<!-- Información de Contacto -->
-<section class="py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <app-section-title
-      title="¿Cómo podemos ayudarte?"
-      subtitle="Elige tu medio de contacto preferido"
-      animation=""
-    ></app-section-title>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-      @for (info of contactInfo; track info.title; let i = $index) {
-        <div
-          class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow p-8 text-center"
-          data-aos="fade-up"
-          [attr.data-aos-delay]="i * 100"
-        >
-          <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i [class]="info.icon + ' text-4xl text-secondary-600'"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">{{ info.title }}</h3>
-          <p class="text-gray-600 mb-6">{{ info.value }}</p>
-          <a
-            [href]="info.link"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-semibold transition-colors"
-          >
-            Contactar
-            <i class="pi pi-arrow-right"></i>
-          </a>
-        </div>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- Redes Sociales -->
-<section class="py-20 bg-gray-50">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <app-section-title
-      title="Síguenos en Redes Sociales"
-      subtitle="Mantente al día con nuestras últimas novedades"
-    ></app-section-title>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
-      @for (social of socialLinks; track social.name; let i = $index) {
-        <a
-          [href]="social.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          [class]="social.color + ' text-white rounded-2xl p-8 flex flex-col items-center justify-center transition-all transform hover:scale-105 hover:shadow-xl'"
-          data-aos="zoom-in"
-          [attr.data-aos-delay]="i * 100"
-        >
-          <i [class]="social.icon + ' text-5xl mb-4'"></i>
-          <span class="text-xl font-bold">{{ social.name }}</span>
-        </a>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- Horarios de Atención -->
-<section class="py-20">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
-    <div class="bg-gradient-to-r from-secondary-800 via-secondary-700 to-secondary-800 rounded-3xl p-12 text-white text-center shadow-2xl border border-primary-500/20">
-      <i class="pi pi-clock text-6xl text-primary-500 mb-6"></i>
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Horario de Atención</h2>
-      <p class="text-xl mb-6">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
-      <p class="text-lg text-gray-300">
-        ¿Necesitas atención urgente? Contáctanos por WhatsApp y te responderemos a la brevedad
-      </p>
-      <button
-        (click)="openWhatsApp()"
-        class="btn btn-primary btn-lg mt-8"
-      >
-        Abrir WhatsApp
-        <i class="pi pi-whatsapp"></i>
-      </button>
-    </div>
-  </div>
-</section>
+<main appScrollStory><section class="hero"><img src="/assets/images/backgrounds/contact-hero.jpg" alt="Paisaje inspirador para planificar un viaje"><div class="shade"></div><div><p class="eyebrow">Cotiza tu viaje / comencemos</p><h1>Tu próxima aventura<br>empieza aquí.</h1><p class="lead">Cuéntanos lo que imaginas. Queremos conocer tu grupo, tus ideas y el destino que te gustaría descubrir.</p></div></section>
+<section class="section light"><div class="split"><div class="reveal"><p class="eyebrow">01 / Solicita una propuesta</p><h2>Hablemos de ese viaje que tienes en mente.</h2><p>Completa algunos datos y prepararemos tu mensaje para enviarlo por WhatsApp o correo electrónico. No necesitas tener todos los detalles definidos: podemos conversar sobre las alternativas.</p><div class="step-list"><article><h3>Cuéntanos quiénes viajan</h3><p>Un curso, un club de personas mayores o un grupo particular: conocer el tipo de viajeros nos ayuda a orientar la propuesta.</p></article><article><h3>Imaginemos el destino</h3><p>Indica un lugar que te interese o déjalo abierto si quieres explorar opciones.</p></article><article><h3>Revisemos los detalles</h3><p>Con fechas y cantidad aproximada de pasajeros podemos comenzar a evaluar alternativas.</p></article></div></div>
+<div class="reveal"><form class="quote-form" (submit)="$event.preventDefault()" aria-label="Datos para solicitar cotización">
+<div class="form-grid"><div class="field"><label for="quote-name">Nombre *</label><input id="quote-name" required autocomplete="name" [ngModel]="name()" (ngModelChange)="name.set($event)" name="name" placeholder="Tu nombre"></div><div class="field"><label for="quote-email">Correo electrónico</label><input id="quote-email" type="email" autocomplete="email" [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" placeholder="tu@correo.cl"></div></div>
+<div class="form-grid"><div class="field"><label for="quote-phone">Teléfono</label><input id="quote-phone" type="tel" autocomplete="tel" [ngModel]="phone()" (ngModelChange)="phone.set($event)" name="phone" placeholder="+56 9..."></div><div class="field"><label for="quote-type">Tipo de viaje</label><select id="quote-type" name="tripType" [ngModel]="tripType()" (ngModelChange)="tripType.set($event)"><option>Gira de estudio</option><option>Viaje para personas mayores</option><option>Viaje grupal</option><option>Viaje a medida</option></select></div></div>
+<div class="form-grid"><div class="field"><label for="quote-destination">Destino de interés</label><input id="quote-destination" name="destination" [ngModel]="destination()" (ngModelChange)="destination.set($event)" placeholder="Ej.: Pucón, Bariloche..."></div><div class="field"><label for="quote-date">Fecha estimada</label><input id="quote-date" name="date" [ngModel]="date()" (ngModelChange)="date.set($event)" placeholder="Ej.: diciembre de 2027"></div></div>
+<div class="field"><label for="quote-passengers">Cantidad aproximada de pasajeros</label><input id="quote-passengers" name="passengers" inputmode="numeric" [ngModel]="passengers()" (ngModelChange)="passengers.set($event)" placeholder="Ej.: 35"></div>
+<div class="field"><label for="quote-notes">¿Qué te gustaría vivir en este viaje?</label><textarea id="quote-notes" name="notes" [ngModel]="notes()" (ngModelChange)="notes.set($event)" placeholder="Cuéntanos actividades, duración, intereses y cualquier detalle importante."></textarea></div>
+<p class="quote-note">Este formulario no almacena ni envía datos a un servidor. Al continuar, se abrirá WhatsApp o tu aplicación de correo con el mensaje preparado para que tú decidas enviarlo.</p>
+<a [href]="whatsappUrl()" target="_blank" rel="noopener noreferrer" class="action">Preparar consulta por WhatsApp ↗</a>
+<a [href]="emailUrl()" style="color:#405a00;font-weight:700">Prefiero enviarlo por correo ↗</a>
+</form></div></div></section>
+<section class="photo-band"><img src="/assets/images/slider/web-galeria-6.jpg" alt="Paisaje natural de aventura"><blockquote>Los grandes recuerdos comienzan con una buena conversación.</blockquote></section>
+<section class="section muted"><div class="intro reveal"><p class="eyebrow">02 / También puedes contactarnos</p><h2>Estamos a un mensaje de distancia.</h2><p>Si prefieres conversar directamente, puedes escribirnos o seguir nuestras redes para descubrir más experiencias.</p></div><div class="contact-links"><a href="mailto:info@girasindomito.cl">info@girasindomito.cl ↗</a><a href="tel:+56963552893">+56 9 6355 2893 ↗</a><a href="https://www.instagram.com/giras_indomito/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="https://www.facebook.com/giras.indomito" target="_blank" rel="noopener noreferrer">Facebook ↗</a></div></section>
+<section class="section light faq"><div class="intro reveal"><p class="eyebrow">03 / Antes de cotizar</p><h2>Lo que necesitas saber.</h2></div><details><summary>¿Debo tener un destino definido?</summary><p>No. Puedes contarnos el tipo de grupo, la temporada y las experiencias que buscas para evaluar alternativas.</p></details><details><summary>¿El formulario confirma una reserva?</summary><p>No. Solo prepara un mensaje de consulta. La disponibilidad, los precios y las condiciones se confirman posteriormente en una propuesta.</p></details><details><summary>¿Puedo consultar por pagos de un viaje contratado?</summary><p>Sí. Si ya tienes un viaje contratado, también puedes acceder al portal de pagos.</p></details><a href="http://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="action">Ir al portal de pagos ↗</a></section>
+<section class="closing"><p class="eyebrow">04 / Dale una vuelta a la aventura</p><h2>La historia empieza cuando decides viajar.</h2><a href="https://wa.link/yhfi8d" target="_blank" rel="noopener noreferrer" class="action">Hablemos por WhatsApp ↗</a></section></main>
