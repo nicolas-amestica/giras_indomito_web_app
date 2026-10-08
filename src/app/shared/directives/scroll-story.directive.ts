@@ -12,7 +12,7 @@ export class ScrollStoryDirective implements AfterViewInit {
     if(this.destroyRef.destroyed)return;
     gsap.registerPlugin(ScrollTrigger);
     const context=gsap.context(()=>{
-      gsap.utils.toArray<HTMLElement>('.reveal').forEach(el=>gsap.from(el,{y:65,opacity:0,duration:1,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
+      gsap.utils.toArray<HTMLElement>('.reveal').forEach(el=>gsap.from(el,{y:45,opacity:0,duration:.8,ease:'power2.out',clearProps:'transform,opacity',scrollTrigger:{trigger:el,start:'top 92%',once:true}}));
       gsap.utils.toArray<HTMLElement>('.photo-band img').forEach(el=>gsap.to(el,{scale:1.22,yPercent:9,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
     },this.element.nativeElement);
     this.destroyRef.onDestroy(()=>context.revert());
