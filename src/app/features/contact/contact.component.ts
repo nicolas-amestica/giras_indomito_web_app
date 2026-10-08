@@ -4,7 +4,7 @@ import {Component,computed,signal} from '@angular/core';import {FormsModule} fro
 `]})
 export class ContactComponent{
 readonly name=signal('');readonly email=signal('');readonly phone=signal('');readonly tripType=signal('Gira de estudio');readonly destination=signal('');readonly date=signal('');readonly passengers=signal('');readonly notes=signal('');
-readonly quoteValid=computed(()=>this.name().trim().length>=2 && (this.phone().replace(/\\D/g,'').length>=8 || /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(this.email().trim())) && this.passengers().trim().length>0);
+readonly quoteValid=computed(()=>this.name().trim().length>=2 && (this.phone().replace(/\D/g,'').length>=8 || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email().trim())) && this.passengers().trim().length>0);
 readonly message=computed(()=>['Hola, Giras Indómito. Me gustaría solicitar una cotización.','',`Nombre: ${this.name()}`,`Correo: ${this.email()||'No indicado'}`,`Teléfono: ${this.phone()||'No indicado'}`,`Tipo de viaje: ${this.tripType()}`,`Destino: ${this.destination()||'Por definir'}`,`Fecha estimada: ${this.date()||'Por definir'}`,`Pasajeros: ${this.passengers()||'Por definir'}`,`Comentarios: ${this.notes()||'Sin comentarios'}`].join('\n'));
 readonly whatsappUrl=computed(()=>'https://wa.me/56963552893?text='+encodeURIComponent(this.message()));
 readonly emailUrl=computed(()=>'mailto:info@girasindomito.cl?subject='+encodeURIComponent('Solicitud de cotización - Giras Indómito')+'&body='+encodeURIComponent(this.message()));
