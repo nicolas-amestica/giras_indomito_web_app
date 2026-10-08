@@ -21,6 +21,7 @@
       >
         Inicio
       </a>
+      <a routerLink="/programas" routerLinkActive="active" class="nav-link">Programas</a>
       <a
         routerLink="/services"
         routerLinkActive="active"
@@ -50,7 +51,8 @@
       class="mobile-menu-button"
       (click)="toggleMobileMenu()"
       [attr.aria-expanded]="isMobileMenuOpen"
-      aria-label="Toggle menu"
+      aria-controls="mobile-navigation"
+      [attr.aria-label]="isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'"
     >
       <span class="menu-icon" [class.open]="isMobileMenuOpen">
         <span></span>
@@ -62,8 +64,9 @@
 </div>
 
 <!-- Mobile Menu Overlay -->
-<div class="mobile-menu-overlay" [class.open]="isMobileMenuOpen" (click)="closeMobileMenu()">
-  <nav class="mobile-nav" (click)="$event.stopPropagation()">
+@if (isMobileMenuOpen) {
+<div id="mobile-navigation" class="mobile-menu-overlay open" (click)="closeMobileMenu()">
+  <nav class="mobile-nav" aria-label="Navegación móvil" (click)="$event.stopPropagation()">
     <a
       routerLink="/"
       routerLinkActive="active"
@@ -73,6 +76,7 @@
     >
       Inicio
     </a>
+    <a routerLink="/programas" routerLinkActive="active" class="mobile-nav-link" (click)="closeMobileMenu()">Programas</a>
     <a
       routerLink="/services"
       routerLinkActive="active"
@@ -100,3 +104,4 @@
     <a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link nav-payment" (click)="closeMobileMenu()">Portal de pagos ↗</a>
   </nav>
 </div>
+}
