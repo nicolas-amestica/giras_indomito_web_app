@@ -73,6 +73,65 @@ npm run build
 ```
 Los archivos compilados se guardarán en el directorio `dist/`.
 
+## 🚚 Despliegue FTP
+
+El despliegue se realiza con el script local `tools/deploy-ftp.local.sh`. Por seguridad, el script, las credenciales y los manifiestos de despliegue están excluidos de Git mediante `.git/info/exclude` y no deben subirse al repositorio.
+
+### Configuración local
+
+Crear el archivo `.ftp-deploy.local.env` en la raíz del proyecto:
+
+```bash
+FTP_HOST='servidor-ftp-asignado-por-el-proveedor'
+FTP_PORT='21'
+FTP_USER='usuario-ftp'
+FTP_PASSWORD='contrasena-ftp'
+```
+
+Restringir los permisos de los archivos locales:
+
+```bash
+chmod 600 .ftp-deploy.local.env
+chmod 700 tools/deploy-ftp.local.sh
+```
+
+Nunca incluir credenciales reales en el README, commits, Pull Requests ni archivos rastreados por Git.
+
+### Desplegar DEV
+
+```bash
+./tools/deploy-ftp.local.sh dev
+```
+
+Este comando:
+
+- Ejecuta `ng build --configuration=dev`.
+- Habilita las funcionalidades configuradas para DEV, incluido el acceso al portal de pagos.
+- Publica el contenido de `dist/app/browser` en `/public_html/dev.girasindomito.cl`.
+- Mantiene un manifiesto incremental independiente en `.ftp-deploy-manifest.dev.local.tsv`.
+
+### Desplegar producción
+
+```bash
+./tools/deploy-ftp.local.sh prd
+```
+
+Este comando:
+
+- Ejecuta `ng build --configuration=production`.
+- Aplica la configuración productiva, que mantiene oculto el portal de pagos mientras no esté disponible en producción.
+- Publica el contenido de `dist/app/browser` en `/public_html`.
+- Mantiene un manifiesto incremental independiente en `.ftp-deploy-manifest.prd.local.tsv`.
+
+### Comportamiento seguro
+
+- El ambiente es obligatorio: el script solo acepta `dev` o `prd`.
+- `index.html` se publica al final para evitar que la página apunte a bundles aún no cargados.
+- Solo se transfieren archivos nuevos o cuyo hash cambió desde el último despliegue del ambiente.
+- El script no elimina archivos remotos ni modifica carpetas de otros dominios.
+- DEV y producción usan builds, destinos y manifiestos independientes.
+- Antes de desplegar, verificar en la consola el ambiente y el destino remoto informados por el script.
+
 ### Server-Side Rendering (SSR)
 Para probar la versión servida desde el backend (SSR):
 

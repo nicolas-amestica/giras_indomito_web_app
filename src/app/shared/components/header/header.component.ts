@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { PAYMENT_PORTAL_ENABLED } from '../../constants/payment-portal.constants';
 
 @Component({
   selector: 'app-header',
@@ -211,6 +212,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   `]
 })
 export class HeaderComponent {
+  protected readonly paymentPortalEnabled = PAYMENT_PORTAL_ENABLED;
   isMobileMenuOpen = false;
 
   toggleMobileMenu(): void {

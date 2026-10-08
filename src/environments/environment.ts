@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://api.girasindomito.cl'
+  apiBaseUrl: 'https://api.girasindomito.cl',
+  paymentPortalEnabled: false
 };

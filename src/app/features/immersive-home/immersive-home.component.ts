@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, DestroyRef, ElementRef, PLATFORM_ID, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PAYMENT_PORTAL_ENABLED } from '../../shared/constants/payment-portal.constants';
 
 @Component({
   selector: 'app-immersive-home',
@@ -107,10 +108,14 @@ import { RouterLink } from '@angular/router';
         <details><summary>¿Qué tipos de viajes organizan?</summary><p>Nos enfocamos en giras de estudio, viajes grupales y experiencias turísticas que pueden adaptarse a las características de cada grupo.</p></details>
         <details><summary>¿Puedo solicitar una propuesta personalizada?</summary><p>Sí. Puedes contarnos el destino que tienes en mente, las fechas aproximadas y el número de pasajeros para comenzar a planificar.</p></details>
         <details><summary>¿Organizan viajes nacionales e internacionales?</summary><p>Presentamos alternativas dentro de Chile y en destinos de Sudamérica. La disponibilidad y los servicios específicos se confirman en cada propuesta.</p></details>
-        <details><summary>¿Dónde puedo gestionar mis pagos?</summary><p>Si ya tienes un viaje contratado, utiliza nuestro acceso al portal de pagos. Los pagos se administran en una plataforma externa a este sitio informativo.</p><a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="text-link">Ir al portal de pagos ↗</a></details>
+        @if (paymentPortalEnabled) {
+          <details><summary>¿Dónde puedo gestionar mis pagos?</summary><p>Si ya tienes un viaje contratado, utiliza nuestro acceso al portal de pagos. Los pagos se administran en una plataforma externa a este sitio informativo.</p><a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="text-link">Ir al portal de pagos ↗</a></details>
+        }
       </div>
     </section>
-    <section class="payments-banner"><div><p class="eyebrow">09 / PARA NUESTROS VIAJEROS</p><h2>Tu aventura también se organiza en línea.</h2><p>¿Ya estás preparando tu próximo viaje con nosotros? Accede al portal de pagos desde aquí.</p></div><a class="action" href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer">Acceder a pagos ↗</a></section>
+    @if (paymentPortalEnabled) {
+      <section class="payments-banner"><div><p class="eyebrow">09 / PARA NUESTROS VIAJEROS</p><h2>Tu aventura también se organiza en línea.</h2><p>¿Ya estás preparando tu próximo viaje con nosotros? Accede al portal de pagos desde aquí.</p></div><a class="action" href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer">Acceder a pagos ↗</a></section>
+    }
     <section class="closing">
       <p class="eyebrow">10 / COMENCEMOS</p>
       <h2>Hay historias que merecen vivirse.</h2>
@@ -165,6 +170,7 @@ import { RouterLink } from '@angular/router';
   `]
 })
 export class ImmersiveHomeComponent implements AfterViewInit {
+  protected readonly paymentPortalEnabled = PAYMENT_PORTAL_ENABLED;
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
   private readonly hero = viewChild.required<ElementRef<HTMLElement>>('hero');

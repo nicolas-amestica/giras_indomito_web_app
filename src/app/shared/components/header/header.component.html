@@ -44,7 +44,9 @@
       >
         Cotiza tu viaje
       </a>
-      <a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="nav-link nav-payment">Portal de pagos ↗</a>
+      @if (paymentPortalEnabled) {
+        <a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="nav-link nav-payment">Portal de pagos ↗</a>
+      }
     </nav>
 
     <!-- Mobile Menu Button -->
@@ -103,7 +105,9 @@
     >
       Contacto
     </a>
-    <a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link nav-payment" (click)="closeMobileMenu()">Portal de pagos ↗</a>
+    @if (paymentPortalEnabled) {
+      <a href="https://pagos.dev.girasindomito.cl/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link nav-payment" (click)="closeMobileMenu()">Portal de pagos ↗</a>
+    }
   </nav>
 </div>
 }
