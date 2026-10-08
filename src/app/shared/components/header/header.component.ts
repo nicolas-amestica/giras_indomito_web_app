@@ -104,7 +104,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       margin-right: -10px;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1080px) {
       .mobile-menu-button {
         display: none;
       }

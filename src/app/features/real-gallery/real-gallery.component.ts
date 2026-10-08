@@ -11,7 +11,7 @@ interface GalleryPhoto {src:string; alt:string; caption:string; tag:string; }
   <section class="photo-grid" aria-label="Galería de experiencias reales">
    @for(photo of photos;track photo.src;let i=$index){
     <figure class="photo reveal" [class.wide]="i===0">
-      <img [src]="photo.src" [alt]="photo.alt" loading="lazy" decoding="async" [attr.width]="i===0?900:1600" [attr.height]="i===0?1600:900">
+      <img [src]="photo.src" [alt]="photo.alt" loading="lazy" decoding="async" [attr.width]="i===1?900:1600" [attr.height]="i===1?1600:900">
       <figcaption><span>{{photo.tag}}</span><strong>{{photo.caption}}</strong></figcaption>
     </figure>
    }
@@ -23,7 +23,8 @@ interface GalleryPhoto {src:string; alt:string; caption:string; tag:string; }
 })
 export class RealGalleryComponent {
  readonly photos:readonly GalleryPhoto[]=[
-  {src:'/assets/images/drive/bariloche-grupo.jpg',alt:'Estudiantes de viaje grupal frente a un edificio histórico de Bariloche',caption:'Momentos que compartimos en Bariloche',tag:'EXPERIENCIAS / BARILOCHE'},
+  {src:'/assets/images/drive/bariloche-curso.jpg',alt:'Grupo de estudiantes caminando frente a un edificio histórico de Bariloche',caption:'Momentos que compartimos en Bariloche',tag:'EXPERIENCIAS / BARILOCHE'},
+  {src:'/assets/images/drive/bariloche-grupo.jpg',alt:'Grupo de estudiantes posando durante su visita a Bariloche',caption:'Una fotografía que cuenta una aventura compartida',tag:'GRUPO / BARILOCHE'},
   {src:'/assets/images/drive/comida-grupal.jpg',alt:'Grupo de estudiantes compartiendo una comida durante el viaje',caption:'La convivencia también es parte de la aventura',tag:'CONVIVENCIA / VIAJE GRUPAL'},
   {src:'/assets/images/drive/actividad-nocturna.jpg',alt:'Estudiantes participando en una actividad recreativa nocturna con luces azules',caption:'Experiencias para recordar con los compañeros',tag:'RECREACIÓN / ACTIVIDADES'}
  ];
