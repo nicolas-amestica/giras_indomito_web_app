@@ -1,86 +1,9 @@
-<!-- Hero Section -->
-<section class="relative h-96 flex items-center justify-center overflow-hidden">
-  <div class="absolute inset-0">
-    <img
-      src="/assets/images/backgrounds/services-hero.jpg"
-      alt="Servicios"
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute inset-0 bg-black/60"></div>
-  </div>
-  <div class="relative z-10 text-center text-white px-4">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">Nuestros Servicios</h1>
-    <p class="text-xl sm:text-2xl text-gray-200">Destinos increíbles para tu próxima aventura</p>
-  </div>
-</section>
-
-<!-- Destinos Section -->
-<section class="py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    @for (destination of destinations; track destination.name; let i = $index) {
-      <div
-        [class.flex-row-reverse]="i % 2 !== 0"
-        class="flex flex-col lg:flex-row gap-12 items-center mb-24 last:mb-0"
-        data-aos="fade-up"
-      >
-        <!-- Imagen -->
-        <div class="lg:w-1/2">
-          <div class="rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow">
-            <img
-              [src]="destination.image"
-              [alt]="destination.name"
-              class="w-full h-96 object-cover hover:scale-110 transition-transform duration-500"
-            />
-          </div>
-        </div>
-
-        <!-- Contenido -->
-        <div class="lg:w-1/2">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            {{ destination.name }}
-          </h2>
-          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-            {{ destination.description }}
-          </p>
-
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Actividades Incluidas:</h3>
-          <ul class="space-y-3 mb-8">
-            @for (activity of destination.activities; track activity) {
-              <li class="flex items-start">
-                <i class="pi pi-check-circle text-primary-600 mr-3 mt-1"></i>
-                <span class="text-gray-700">{{ activity }}</span>
-              </li>
-            }
-          </ul>
-
-          <button
-            routerLink="/programs"
-            class="btn btn-primary btn-lg"
-          >
-            Ver Programas
-            <i class="pi pi-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    }
-  </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-20 bg-secondary-600">
-  <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8" data-aos="zoom-in">
-    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
-      ¿Necesitas más información?
-    </h2>
-    <p class="text-xl text-gray-300 mb-8">
-      Contáctanos y resolveremos todas tus dudas
-    </p>
-    <button
-      routerLink="/contact"
-      class="btn btn-primary btn-lg"
-    >
-      Contactar Ahora
-      <i class="pi pi-whatsapp"></i>
-    </button>
-  </div>
-</section>
+<main appScrollStory>
+<section class="hero"><img src="/assets/images/backgrounds/services-hero.jpg" alt="Paisaje de viaje y aventura"><div class="shade"></div><div><p class="eyebrow">Experiencias / destinos / personas</p><h1>Viajes que dejan<br>historias para contar.</h1><p class="lead">De las giras de estudio a los viajes grupales: nuevas formas de conocer el mundo, compartir y sorprenderse.</p></div></section>
+<section class="section light"><div class="intro reveal"><p class="eyebrow">01 / Nuestras experiencias</p><h2>Hay una aventura para cada grupo.</h2><p>No todos los viajeros buscan lo mismo. Por eso ofrecemos distintas modalidades de viaje, con propuestas que se adaptan a la edad, los intereses y el espíritu de cada grupo.</p></div><div class="grid">@for(item of experiences;track item.number){<article class="panel reveal"><span>{{item.number}} / EXPERIENCIA</span><h3>{{item.title}}</h3><p>{{item.text}}</p><ul class="line-list">@for(detail of item.items;track detail){<li>{{detail}}</li>}</ul></article>}</div></section>
+<section class="photo-band"><img src="/assets/images/slider/web-galeria-4.jpg" alt="Paisaje natural de viaje"><blockquote>El mejor recuerdo empieza con un «vamos».</blockquote></section>
+<section class="section muted"><div class="intro reveal"><p class="eyebrow">02 / Destinos</p><h2>Desde los volcanes del sur hasta nuevas fronteras.</h2><p>Explora algunas de las rutas que inspiran nuestros programas. Cada destino puede formar parte de distintas propuestas, sujetas a temporada y disponibilidad.</p></div>@for(destination of destinations;track destination.title;let i=$index){<article class="split reveal" style="margin-top:90px"><img [src]="destination.image" [alt]="destination.title" loading="lazy"><div><p class="eyebrow">Destino / 0{{i+1}}</p><h2>{{destination.title}}</h2><p>{{destination.description}}</p><a routerLink="/contact" class="action">Consultar por este destino ↗</a></div></article>}</section>
+<section class="section light"><div class="intro reveal"><p class="eyebrow">03 / Cómo trabajamos</p><h2>Del primer mensaje al próximo gran recuerdo.</h2><p>Organizar un viaje grupal requiere coordinación. Queremos que sepas cómo comienza el proceso y qué información nos ayuda a preparar una propuesta útil.</p></div><div class="grid">@for(step of steps;track step.title;let i=$index){<article class="panel reveal"><span>0{{i+1}} / PASO</span><h3>{{step.title}}</h3><p>{{step.text}}</p></article>}</div></section>
+<section class="section faq"><div class="intro reveal"><p class="eyebrow">04 / Información útil</p><h2>Todo viaje comienza con buenas preguntas.</h2></div><details><summary>¿Los programas tienen actividades fijas?</summary><p>Las actividades y los servicios incluidos dependen de la propuesta y se detallan antes de contratar. Las actividades mencionadas en el sitio son referenciales.</p></details><details><summary>¿Pueden viajar grupos de diferentes tamaños?</summary><p>Podemos evaluar alternativas según el número de pasajeros, el destino y las fechas solicitadas.</p></details><details><summary>¿Los destinos internacionales requieren documentos?</summary><p>Los requisitos de ingreso dependen del país, la nacionalidad y las condiciones vigentes. Se revisan durante la planificación.</p></details></section>
+<section class="closing"><p class="eyebrow">05 / Tu próximo viaje</p><h2>¿A dónde te gustaría llegar?</h2><a routerLink="/contact" class="action">Cotiza tu aventura ↗</a></section>
+</main>
