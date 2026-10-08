@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
+  host: {'(document:keydown.escape)': 'closeMobileMenu()'},
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
@@ -54,7 +55,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       gap: 27px;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1080px) {
       .desktop-nav {
         display: flex;
       }
@@ -206,7 +207,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     .nav-payment::after { display:none!important }
     .nav-quote{border:1px solid #70806c;border-radius:5px;padding:11px 16px!important}
     @media(max-width:900px){.desktop-nav{gap:14px}.navbar-container{padding:0 20px}.nav-link{font-size:13px}}
-    @media(max-width:767px){.mobile-nav .nav-payment{display:block;margin-top:20px;text-align:center}.mobile-nav{padding:24px}.mobile-menu-overlay{height:calc(100svh - 80px)}}
+    @media(max-width:1079px){.mobile-nav .nav-payment{display:block;margin-top:20px;text-align:center}.mobile-nav{padding:24px}.mobile-menu-overlay{height:calc(100svh - 80px)}}
   `]
 })
 export class HeaderComponent {
