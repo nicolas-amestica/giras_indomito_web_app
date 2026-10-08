@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+    loadComponent: () => import('./features/immersive-home/immersive-home.component').then(m => m.ImmersiveHomeComponent),
     title: 'Inicio - Giras Indómito'
   },
   {
