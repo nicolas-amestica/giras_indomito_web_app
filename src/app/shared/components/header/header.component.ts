@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -15,16 +15,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     }
 
     .apple-navbar {
-      background: rgba(45, 45, 45, 0.95);
+      background: rgba(19, 29, 23, 0.89);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid rgba(215, 255, 0, 0.2);
-      height: 72px;
+      height: 80px;
       width: 100%;
     }
 
     .navbar-container {
-      max-width: 1200px;
+      max-width: 1520px;
       margin: 0 auto;
       padding: 0 32px;
       height: 100%;
@@ -51,7 +51,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     .desktop-nav {
       display: none;
       align-items: center;
-      gap: 40px;
+      gap: 27px;
     }
 
     @media (min-width: 768px) {
@@ -145,7 +145,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
     .mobile-menu-overlay {
       position: fixed;
-      top: 72px;
+      top: 80px;
       left: 0;
       right: 0;
       bottom: 0;
@@ -201,6 +201,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       font-weight: 500;
       padding-left: 8px;
     }
+    .nav-payment { background:#d7ff00;color:#172018!important;border-radius:5px;padding:12px 19px!important;font-size:13px;font-weight:800;letter-spacing:.02em;transition:transform .2s } 
+    .nav-payment:hover { transform:translateY(-2px);background:#eaff52 }
+    .nav-payment::after { display:none!important }
+    .nav-quote{border:1px solid #70806c;border-radius:5px;padding:11px 16px!important}
+    @media(max-width:900px){.desktop-nav{gap:14px}.navbar-container{padding:0 20px}.nav-link{font-size:13px}}
+    @media(max-width:767px){.mobile-nav .nav-payment{display:block;margin-top:20px;text-align:center}.mobile-nav{padding:24px}.mobile-menu-overlay{height:calc(100svh - 80px)}}
   `]
 })
 export class HeaderComponent {
