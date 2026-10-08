@@ -97,8 +97,8 @@ import { RouterLink } from '@angular/router';
         <p class="eyebrow">07 / RECUERDOS REALES</p>
         <h2 id="photo-story-title">Lo que vivimos juntos permanece.</h2>
         <p>Las mejores historias no caben en un itinerario. Descubre parte de las aventuras que han compartido nuestros viajeros y conoce nuestra forma de explorar.</p>
-        <a href="https://drive.google.com/drive/folders/1-h6_viedTjpQMIzdrhoei3-wa5f9jEUL" target="_blank" rel="noopener noreferrer" class="text-link">Explorar álbum de viajes ↗</a>
-        <small>El acceso a las fotografías depende de los permisos de Google Drive.</small>
+        <a routerLink="/experiencias-reales" class="text-link">Ver experiencias reales ↗</a>
+        <small>Fotografías auténticas de nuestros viajes, publicadas con autorización.</small>
       </div>
     </section>
     <section class="faq" aria-labelledby="faq-title">

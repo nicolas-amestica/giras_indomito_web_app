@@ -8,6 +8,12 @@ export const routes: Routes = [
     data:{description:'Organiza la gira de estudio de tu curso con Giras Indómito. Descubre destinos, experiencias grupales y solicita una cotización.'}
   },
   {
+    path: 'experiencias-reales',
+    loadComponent: () => import('./features/real-gallery/real-gallery.component').then(m => m.RealGalleryComponent),
+    title: 'Experiencias Reales y Fotografías de Giras | Giras Indómito',
+    data:{description:'Conoce fotografías auténticas de giras de estudio y experiencias compartidas por grupos que viajaron con Giras Indómito.'}
+  },
+  {
     path: 'programas',
     loadComponent: () => import('./features/programs/programs.component').then(m => m.ProgramsComponent),
     title: 'Programas de Giras de Estudio | Giras Indómito',
