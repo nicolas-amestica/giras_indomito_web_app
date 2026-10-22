@@ -10,7 +10,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/.claude/rules/global-rules.md",
       "targetPath": ".claude/rules/global-rules.md",
-      "checksum": "sha256:dd2d62ace6657b7d5c02638d91a4f81d585a89bfc96b76c836f09f4228a3413a"
+      "checksum": "sha256:158b782d1f2df91b37493048ce013527ec65a5130f48f8ef0c9b35142613e2da"
     },
     {
       "sourcePaths": [
@@ -18,7 +18,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/.claude/rules/repo-rules.md",
       "targetPath": ".claude/rules/repo-rules.md",
-      "checksum": "sha256:83b31207c3a140e29be164f5583c0f4626b31a54d5143c8289592bd69eccca50"
+      "checksum": "sha256:190dc32af34c7096643b81565065979ca878af4710e90ac9c108c3a48bae8888"
     },
     {
       "sourcePaths": [
@@ -46,6 +46,7 @@
     },
     {
       "sourcePaths": [
+        "docs/standards/api-khipu-renditions.md",
         "docs/standards/architecture/auth-flow.md",
         "docs/standards/architecture/contracts-policy.md",
         "docs/standards/architecture/environment-definitions.md",
@@ -75,7 +76,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/.kiro/steering/standards-ref.md",
       "targetPath": ".kiro/steering/standards-ref.md",
-      "checksum": "sha256:286e97c325d58da2ff3d59a1250479b8e5ab65d6f245742a2a6194dd48b00f8c"
+      "checksum": "sha256:89e4c610c59ff1c49c7ece93a7199af634df3e1ddaeaf848e114c16769dca5ed"
     },
     {
       "sourcePaths": [
@@ -87,7 +88,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/AGENTS.md",
       "targetPath": "AGENTS.md",
-      "checksum": "sha256:133d36ec3b59ce5f5de3393c0d09d57958ef8ec9381c7ac3d732f8d3f5fe290a"
+      "checksum": "sha256:5145c75dc03370a034401b519a7b712132648c891b42045c36dba2870745f71c"
     },
     {
       "sourcePaths": [
@@ -99,7 +100,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/CLAUDE.md",
       "targetPath": ".claude/CLAUDE.md",
-      "checksum": "sha256:55cbc99c936a3ca4126454c004d615e2295f375190784d19c11b07b8b0cf270a"
+      "checksum": "sha256:0eee4f1c851c5906abb24a239deb2e08eb5d68457ce0e3a7f1031e34ca3f88d5"
     },
     {
       "sourcePaths": [
@@ -111,7 +112,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/GEMINI.md",
       "targetPath": ".gemini/GEMINI.md",
-      "checksum": "sha256:fabd3331eeadb10bcee128b3f80e329ad8d7a048e5aceb30e4fe0d96eccd06db"
+      "checksum": "sha256:41daadc329324de77b5e9ef826d81ec0e61e561cd0c1ec51346c006d182fe20e"
     },
     {
       "sourcePaths": [
@@ -146,7 +147,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/skills/claude/angular-best-practices.md",
       "targetPath": ".claude/skills/angular-best-practices.md",
-      "checksum": "sha256:82f6b526bd2c91660b73e5661842841114b092679f9d7733e3572e34745b6008"
+      "checksum": "sha256:4d565f61f529ae9c8732a028b44163a634207cd954d67f15b6330fc839ee0578"
     },
     {
       "sourcePaths": [
@@ -162,7 +163,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/skills/claude/aws-naming-review.md",
       "targetPath": ".claude/skills/aws-naming-review.md",
-      "checksum": "sha256:71986852fc56bf70ef830b240328846a046c8d212d7df962bfcc51f6a5734e23"
+      "checksum": "sha256:d9f6663b20313cd3bf2dc8629f099b916f6696084238ccad394516ffc28b0c86"
     },
     {
       "sourcePaths": [
@@ -170,7 +171,7 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/skills/kiro/angular-best-practices.md",
       "targetPath": ".kiro/skills/angular-best-practices.md",
-      "checksum": "sha256:82f6b526bd2c91660b73e5661842841114b092679f9d7733e3572e34745b6008"
+      "checksum": "sha256:4d565f61f529ae9c8732a028b44163a634207cd954d67f15b6330fc839ee0578"
     },
     {
       "sourcePaths": [
@@ -186,11 +187,11 @@
       ],
       "outputPath": "ai/generated/app-ngx-web/skills/kiro/aws-naming-review.md",
       "targetPath": ".kiro/skills/aws-naming-review.md",
-      "checksum": "sha256:71986852fc56bf70ef830b240328846a046c8d212d7df962bfcc51f6a5734e23"
+      "checksum": "sha256:d9f6663b20313cd3bf2dc8629f099b916f6696084238ccad394516ffc28b0c86"
     }
   ],
   "managedBy": "indomito-context-compiler",
   "artifactFormatVersion": 1,
-  "sourceCommit": "7e0f57e114e56f8e331a5cae800f4713f3efd95a",
+  "sourceCommit": "fb753fad2d9c7dae73ce0b5f0461b6f5a470298f",
   "sourceDirty": true
 }

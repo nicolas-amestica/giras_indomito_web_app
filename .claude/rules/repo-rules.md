@@ -26,6 +26,7 @@ Aplicación Angular 21 pública con SSR para presentar la marca, programas, dest
 - Priorizar SEO, accesibilidad, rendimiento, diseño responsive y compatibilidad SSR; no usar directamente APIs exclusivas del navegador sin proteger su ejecución.
 - No incorporar sesión administrativa, IAM, checkout ni gestión de cuotas.
 - Usar PrimeNG para controles y Tailwind para composición conforme a la versión instalada en este repositorio.
+- El sistema de iconos de este repo son PrimeIcons (`pi pi-*`), instalado y importado en `src/styles.css`, y se conserva. No introducir Iconify/Tabler sin una decisión explícita, y no aplicar aquí la prohibición de `pi` que rige en `app-ngx-hub` y `app-ngx-pay`.
 - Mantener componentes standalone y responsabilidades autocontenidas en `core`, `features`, `layout` y `shared`.
 - TSDoc en español para funciones públicas e interfaces.
 - Validar anchos de 320 px, 390 px, tablet y escritorio.
